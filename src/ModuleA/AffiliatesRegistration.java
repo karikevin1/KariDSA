@@ -5,6 +5,7 @@
  */
 package modulea;
 
+import ModuleA.entity.Affiliates;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
