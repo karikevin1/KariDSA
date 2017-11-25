@@ -1,13 +1,12 @@
 package ModuleC;
 
+import ModuleC.adt.CreateOrder;
+import ModuleC.entity.Order;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SelectMenuItem extends JPanel{
@@ -19,7 +18,8 @@ public class SelectMenuItem extends JPanel{
     private JPanel jpOrder = new JPanel(new BorderLayout());
     private JPanel jpItemList = new JPanel();
     private JPanel jpOrderAction = new JPanel();
-    public Order order = new Order();
+    public CreateOrder createOrder = new CreateOrder();
+    //change to restaurant class
     String rest;
     
     public SelectMenuItem(String rest){
@@ -27,9 +27,10 @@ public class SelectMenuItem extends JPanel{
         
         PassSelectedMenu passSelectedMenu = new PassSelectedMenu();
         int loopCnt = 0;
-        
+        //change to menu class
         String[] menuList = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
         
+        // show all available Item on the Frame
         for (int i = 0 ; i < 2 ; i++){
             for (int j = 0 ; j < 5 ; j++){
                 jbtMenuList[loopCnt] = new JButton("" + menuList[loopCnt]);
@@ -38,6 +39,7 @@ public class SelectMenuItem extends JPanel{
             }
         }
         
+        //initialize GUI
         setLayout(new BorderLayout());
         OrderActListn orderAL = new OrderActListn();
         jbtOrder.addActionListener(orderAL);
@@ -60,11 +62,11 @@ public class SelectMenuItem extends JPanel{
             for (JButton jbt : jbtMenuList) {
                 if (jbt == buttonClicked){
                     System.out.println(jbt.getText());
-                    order.updateItemList(jbt.getText());
+                    createOrder.updateItemList(jbt.getText());
                 }
             }
-            System.out.print(order.toString());
-            order.updateItemPanel(jpItemList);
+            System.out.print(createOrder.order.toString());
+            createOrder.updateItemPanel(jpItemList);
         } 
     }
     
@@ -77,8 +79,8 @@ public class SelectMenuItem extends JPanel{
                 
             }else if (src.equals(jbtReset)){
                 System.out.println("Reset");
-                order.clearOrder();
-                order.updateItemPanel(jpItemList);
+                createOrder.clearOrder();
+                createOrder.updateItemPanel(jpItemList);
             }else if (src.equals(jbtCancel)){
                 System.out.println("Cancel");
                 

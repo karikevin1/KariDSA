@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 //extend this class with JPanel
 public class SelectRestaurant extends JFrame{
     private JButton[] jbtRestaurantList = new JButton[10];
@@ -60,25 +59,5 @@ public class SelectRestaurant extends JFrame{
     //move to main page.
     public static void main(String args[]){
         new SelectRestaurant();
-    }
-    
-    //test case
-    public class Menu{
-        int price;
-        String status;
-        String name;
-        Restaurant restaurant;
-        
-        public void Menu(){
-            price = 10;
-            status = "Avalable";
-            name = "snack plate";
-        }
-    }
-    public class Restaurant{
-        String name;
-        public void Restaurant(){
-            name = "kfc";
-        }
     }
 }
