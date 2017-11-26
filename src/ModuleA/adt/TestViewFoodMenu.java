@@ -26,10 +26,6 @@ public class TestViewFoodMenu {
             System.out.println(firstNode.getFoodData() + "");
         }
         
-        for(firstNode=node2; firstNode!=null; firstNode=firstNode.getNextFoodNode()){
-            System.out.println(firstNode.getFoodOutlet());
-        }
-        
         System.out.println();
     }
 }
