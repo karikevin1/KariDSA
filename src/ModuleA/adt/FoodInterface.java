@@ -12,12 +12,18 @@ package ModuleA.adt;
 public interface FoodInterface<T> {
     public boolean addFood(T newEntry);
     public boolean addFood(int newPosition, T newEntry);
-    public T removeFood(int givenPosition);
-    public void clearFood();
-    public boolean replaceFood(int givenPosition, T newEntry);
-    public T getFoodEntry(int givenPosition);
+    public boolean addOutletRest(T newEntry);
+    public boolean addOutletRest(int newPosition, T newEntry);
+    public boolean addFoodPrice(T newEntry);
+    public boolean addFoodPrice(int newPosition, T newEntry);
+    public boolean addFoodDesc(T newEntry);
+    public boolean addFoodDesc(int newPosition, T newEntry);
+//   public T remove(int givenPosition);
+    public void clear();
+ //   public boolean replace(int givenPosition, T newEntry);
+    public T getEntry(int givenPosition);
     public boolean contains(T anEntry);
-    public int getNumberFoodEntries();
+    public int getNumberOfEntries();
     public boolean isEmpty();
     public boolean isFull();
 

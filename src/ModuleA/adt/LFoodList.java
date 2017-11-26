@@ -11,13 +11,16 @@ package ModuleA.adt;
  */
 public class LFoodList<T> implements FoodInterface<T> {
     private FoodNode firstFoodNode;
+    private FoodNode secondFoodNode;
+    private FoodNode thirdFoodNode;
+    private FoodNode fourthFoodNode;
     private int numberOfEntries;
     
     public LFoodList(){
-        clearFood();
+        clear();
     }
     
-    public final void clearFood(){
+    public final void clear(){
         firstFoodNode = null;
         numberOfEntries = 0;
     }
@@ -55,8 +58,104 @@ public class LFoodList<T> implements FoodInterface<T> {
         }
         return isSuccessful;
     }
+       public boolean addOutletRest(T newEntry){
+        FoodNode newFoodNode = new FoodNode<>(newEntry);
+        
+        if(isEmpty()){
+            secondFoodNode = newFoodNode;
+        }else{
+            FoodNode<T> lastFoodNode = getNodeAt(numberOfEntries);
+            lastFoodNode.setNextFoodNode(newFoodNode);
+        }
+        numberOfEntries ++;
+        return true;
+    }
+    public boolean addOutletRest(int newFoodPosition, T newEntry){
+        boolean isSuccessful = true;
+        
+        if((newFoodPosition >= 1 && newFoodPosition <= numberOfEntries + 1)){
+            FoodNode<T> newFoodNode = new FoodNode<T>(newEntry);
+            if(isEmpty() || (newFoodPosition == 1)){
+                newFoodNode.setNextFoodNode(secondFoodNode);
+                secondFoodNode = newFoodNode;
+            }else{
+                FoodNode foodNodeBefore = getNodeAt(newFoodPosition - 1);
+                FoodNode foodNodeAfter = foodNodeBefore.getNextFoodNode();
+                newFoodNode.setNextFoodNode(foodNodeAfter);
+                foodNodeBefore.setNextFoodNode(newFoodNode);
+            }
+            numberOfEntries ++;
+        }else{
+            isSuccessful = false;
+        }
+        return isSuccessful;
+    }
+    public boolean addFoodPrice(T newEntry){
+        FoodNode newFoodNode = new FoodNode<>(newEntry);
+        
+        if(isEmpty()){
+            thirdFoodNode = newFoodNode;
+        }else{
+            FoodNode<T> lastFoodNode = getNodeAt(numberOfEntries);
+            lastFoodNode.setNextFoodNode(newFoodNode);
+        }
+        numberOfEntries ++;
+        return true;
+    }
+    public boolean addFoodPrice(int newFoodPosition, T newEntry){
+        boolean isSuccessful = true;
+        
+        if((newFoodPosition >= 1 && newFoodPosition <= numberOfEntries + 1)){
+            FoodNode<T> newFoodNode = new FoodNode<T>(newEntry);
+            if(isEmpty() || (newFoodPosition == 1)){
+                newFoodNode.setNextFoodNode(thirdFoodNode);
+                thirdFoodNode = newFoodNode;
+            }else{
+                FoodNode foodNodeBefore = getNodeAt(newFoodPosition - 1);
+                FoodNode foodNodeAfter = foodNodeBefore.getNextFoodNode();
+                newFoodNode.setNextFoodNode(foodNodeAfter);
+                foodNodeBefore.setNextFoodNode(newFoodNode);
+            }
+            numberOfEntries ++;
+        }else{
+            isSuccessful = false;
+        }
+        return isSuccessful;
+    }
+    public boolean addFoodDesc(T newEntry){
+        FoodNode newFoodNode = new FoodNode<>(newEntry);
+        
+        if(isEmpty()){
+            fourthFoodNode = newFoodNode;
+        }else{
+            FoodNode<T> lastFoodNode = getNodeAt(numberOfEntries);
+            lastFoodNode.setNextFoodNode(newFoodNode);
+        }
+        numberOfEntries ++;
+        return true;
+    }
+    public boolean addFoodDesc(int newFoodPosition, T newEntry){
+        boolean isSuccessful = true;
+        
+        if((newFoodPosition >= 1 && newFoodPosition <= numberOfEntries + 1)){
+            FoodNode<T> newFoodNode = new FoodNode<T>(newEntry);
+            if(isEmpty() || (newFoodPosition == 1)){
+                newFoodNode.setNextFoodNode(fourthFoodNode);
+                fourthFoodNode = newFoodNode;
+            }else{
+                FoodNode foodNodeBefore = getNodeAt(newFoodPosition - 1);
+                FoodNode foodNodeAfter = foodNodeBefore.getNextFoodNode();
+                newFoodNode.setNextFoodNode(foodNodeAfter);
+                foodNodeBefore.setNextFoodNode(newFoodNode);
+            }
+            numberOfEntries ++;
+        }else{
+            isSuccessful = false;
+        }
+        return isSuccessful;
+    }
     
-    public T removeFood(int givenFoodPosition){
+    public T remove(int givenFoodPosition){
         T foodResult = null;
         
         if(givenFoodPosition >= 1 && (givenFoodPosition <= numberOfEntries)){
@@ -75,7 +174,7 @@ public class LFoodList<T> implements FoodInterface<T> {
         return foodResult;
     }
     
-    public boolean replaceFood(int givenFoodPosition, T newEntry){
+    public boolean replace(int givenFoodPosition, T newEntry){
         boolean isSuccessful = true;
         
         if (givenFoodPosition >= 1 && (givenFoodPosition <= numberOfEntries)){
@@ -87,7 +186,7 @@ public class LFoodList<T> implements FoodInterface<T> {
         return isSuccessful;
     }
     
-    public T getFoodEntry(int givenFoodPosition){
+    public T getEntry(int givenFoodPosition){
         T foodResult = null;
         
         if (givenFoodPosition >= 1 && (givenFoodPosition <= numberOfEntries)){
@@ -110,7 +209,7 @@ public class LFoodList<T> implements FoodInterface<T> {
         return found;
     }
     
-    public int getNumberFoodEntries(){
+    public int getNumberOfEntries(){
         return numberOfEntries;
     }
             
