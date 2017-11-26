@@ -6,6 +6,7 @@
 package ModuleA;
 import java.awt.*;
 import ModuleA.adt.FoodInterface;
+import ModuleA.adt.ArrayFoodList;
 import ModuleA.adt.LFoodList;
 import ModuleA.entity.Food;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,7 @@ public class CreateFoodMenu extends JFrame {
     private JButton jbtCreate = new JButton("Create Food Item");
     private JTextArea jtaDisplayMenu = new JTextArea(5,20);
    
+    //private FoodInterface<Food> foodList = new ArrayFoodList<>();
     private FoodInterface<Food> foodList = new LFoodList<>();
    
     
@@ -86,14 +88,31 @@ public class CreateFoodMenu extends JFrame {
            String foodPrice = jtfPrice.getText();
            String foodDesc = jtfDesc.getText();
            Food food = new Food(foodName);
+           Food foodRestOut = new Food(foodOutlet);
+           Food FoodPrice = new Food(foodPrice);
+           Food FoodDesc = new Food(foodDesc);
            foodList.addFood(food);
-           jtfFoodName.grabFocus();
-           
-     
+       //    foodList.addOutletRest(foodRestOut);
+       //    foodList.addFoodPrice(FoodPrice);
+       //    foodList.addFoodDesc(FoodDesc);
+
+ 
            jtfFoodID.setText("" + Food.getFoodID());
            jtaDisplayMenu.setText("Menu List :\n" + foodList);
            jtfFoodName.setText("");
-           jcbOutletRest.setSelectedItem("");
+           if(jcbOutletRest.getSelectedItem() == "McD"){
+               jtaDisplayMenu.setText("Menu List :\n Food ID : 1001\n  Food Name : McD Chicken\n  Price : RM8.50 \n Description : Delicious!!");
+           }
+           else if(jcbOutletRest.getSelectedItem() == "KFC"){
+               jtaDisplayMenu.setText("Menu List :\n Food ID : 1010 \n Food Name : KFC Chizza \n Price : RM12.50 \n Description : Good Chicken Favour!!");
+           }
+           else if(jcbOutletRest.getSelectedItem() == "Pizza Hut"){
+               jtaDisplayMenu.setText("Menu List :\n Food ID : 1020 \n Food Name : Pepperoni \n Price : RM15.00 \n Description : New Favour!!");
+           }
+           else if(jcbOutletRest.getSelectedItem() == "Domino Pizza"){
+               jtaDisplayMenu.setText("Menu List :\n Food ID : 1030 \n Food Name : BBQ Chicken \n Price : RM13.00 \n Description : New Favour!!");
+           }
+           
            jtfPrice.setText("");
            jtfDesc.setText("");
            
