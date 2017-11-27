@@ -5,7 +5,7 @@
  */
 package ModuleB.entity;
 
-import ModuleD.entity.*;
+
 
 /**
  *
