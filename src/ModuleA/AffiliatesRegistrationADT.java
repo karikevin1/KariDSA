@@ -11,7 +11,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import ModuleA.adt.AffiliatesRegistrationInterface;
 import ModuleA.adt.AffiliatesList;
-import modulea.Affiliates;
+import ModuleA.entity.Affiliates;
 
 /**
  *
