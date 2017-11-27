@@ -84,7 +84,7 @@ public class PendingList extends JFrame{
             try{
                 int id = Integer.parseInt(jcbID.getSelectedItem().toString());
                 jtfName.setText(dpi.retrieveSelectedProfile(id).getStaffName());
-                jtaStaffList.setText("Name           StaffID          OrderNo          CustomerName   CustomerContactNo\n"+dpi.retrievePendingList(id));
+                jtaStaffList.setText("OrderNo       CustName   CustomerContactNo\n"+dpi.retrievePendingList(id));
                 if(dpi.retrievePendingList(id).equals("Free and Available")){
                     jtfStatus.setText("Available");
                 }else{

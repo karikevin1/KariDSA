@@ -86,7 +86,7 @@ public class Delivery {
     }
     
     public String toShortString() {
-        return String.format("%-18s %-18s %-18s %-18s %-18s", staffName,staffID,orderNo,customerName,customerContactNo);
+        return String.format("%-18s %-18s %-18s",orderNo,customerName,customerContactNo);
     }
     
 }
