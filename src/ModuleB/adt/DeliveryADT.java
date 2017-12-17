@@ -11,21 +11,71 @@ import ModuleB.entity.Delivery;
  *
  * @author kevin lim
  */
-public class DeliveryADT implements DeliveryInterface{
-    private static final ListInterface <Delivery> deliList = new LList();
+public class DeliveryADT<T> implements DeliveryInterface<T>{
+    private DeliveryNode<T> firstNode;
+    private int numberOfDelivery;
     
-    public ListInterface<Delivery> retrieveList(){
-        if(this.deliList.isEmpty()){
-            Delivery initializeList1, initializeList2, initializeList3, initializeList4;
-            initializeList1= new Delivery("LimKH", 1234,"A01", "pewdiepie", "0162313212", "Delivering");
-            initializeList2= new Delivery("LimKW", 1111,"A02", "MsTingTT", "012432434", "Delivering");
-            initializeList3= new Delivery("LowSK",3456, "A03", "AhLiao", "01312321213", "Delivering");
-            initializeList4= new Delivery("NgWD",9909, "A04", "Kazuma", "015213797", "Delivering");        
-            this.deliList.add(initializeList1);
-            this.deliList.add(initializeList2);
-            this.deliList.add(initializeList3);
-            this.deliList.add(initializeList4);
-        }
-        return this.deliList;  
+    @Override
+    public boolean createDelivery (T deliEntry){
+         DeliveryNode <T> newDelivery = new DeliveryNode<>(deliEntry);
+           
+           if(isEmpty())
+           {
+               firstNode = newDelivery;   
+           }else{
+              DeliveryNode<T> last = getNodeAt(numberOfDelivery);
+              last.nextDeli = newDelivery;
+           }
+           
+           numberOfDelivery++;
+           return true;
     }
+    
+    @Override
+    public T getSelectedDelivery(int positon){
+        T result = null;
+            result = (T)getNodeAt(positon+1).delivery;
+        return result;
+    }
+    
+    private DeliveryNode<T> getNodeAt(int givenPosition) {
+           DeliveryNode<T> current = firstNode;
+
+           // traverse the list to locate the desired node
+           for (int counter = 1; counter < givenPosition; counter++) {
+             current = current.nextDeli;
+           }
+           
+           return current;
+    }
+    
+    @Override
+    public boolean isEmpty() {
+          boolean result;
+
+          result = numberOfDelivery == 0;
+
+          return result;
+    }
+    
+    @Override
+    public int getNumberOfEntries() {
+          return numberOfDelivery;
+    }
+    
+    private class DeliveryNode<T> {
+
+          private T delivery;
+          private DeliveryNode nextDeli;
+
+          private DeliveryNode(T delivery) {
+            this.delivery = delivery;
+            this.nextDeli = null;
+          }
+
+          private DeliveryNode(T delivery, DeliveryNode nextDeli) {
+            this.delivery = delivery;
+            this.nextDeli = nextDeli;
+          }
+    } // end Node
 }

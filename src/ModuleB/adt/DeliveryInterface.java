@@ -10,6 +10,13 @@ import ModuleB.entity.Delivery;
  *
  * @author kevin lim
  */
-public interface DeliveryInterface {
-    public ListInterface<Delivery> retrieveList();
+public interface DeliveryInterface<T> {
+    public boolean createDelivery (T deliEntry);
+    //create delivery object
+    public T getSelectedDelivery(int position);
+        //pass in id , get the selected delivery object
+    public int getNumberOfEntries() ;
+    //get size
+    public boolean isEmpty();
+    //isEmpty
 }

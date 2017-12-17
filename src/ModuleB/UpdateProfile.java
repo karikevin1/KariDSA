@@ -12,12 +12,7 @@ import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfile;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.entity.DeliveryMan;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 
 
 /**
@@ -40,17 +35,23 @@ public class UpdateProfile extends JFrame{
     private JTextField jtfGender = new JTextField();
     private JTextField jtfIcNo = new JTextField();
     private JTextField jtfSalary = new JTextField();
+    
     private JTextArea jtaStaffList = new JTextArea(20, 20); // StaffList
     
+    private JButton searchProfile = new JButton("Search");
     private JButton updateProfile = new JButton("Update");
     private JButton reset = new JButton("reset");
-    public DeliveryProfileInterface dpi = new DeliveryProfile();
     
+    public DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryManManagement().getList();
+    //get the list from the main page
+    
+    private DeliveryMan selectedProfile = new DeliveryMan();
+  
     public UpdateProfile(){
         initializeList();
         
         setTitle("Update Profile");
-        Font font = new Font("Arial", Font.BOLD, 18);
+       // Font font = new Font("Arial", Font.BOLD, 18);
         jblID.setHorizontalAlignment(SwingConstants.CENTER);
         jblName.setHorizontalAlignment(SwingConstants.CENTER);
         jblNo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,25 +69,35 @@ public class UpdateProfile extends JFrame{
         jblSalary.setHorizontalAlignment(SwingConstants.CENTER);   
         
         jtaStaffList.setEditable(false);
-        JPanel jpInfo = new JPanel(new GridLayout(8,2));
+        JPanel jpInfo = new JPanel(new GridLayout(0,2));
         jpInfo.add(jblID);
         jpInfo.add(jtfID);
         jpInfo.add(jblName);
+        jtfName.setEditable(false);
         jpInfo.add(jtfName);
         jpInfo.add(jblNo);
+        jtfNo.setEditable(false);
         jpInfo.add(jtfNo);
         jpInfo.add(jblAdd);
+        jtfAdd.setEditable(false);
         jpInfo.add(jtfAdd);
         jpInfo.add(jblGender);
+        jtfGender.setEditable(false);
         jpInfo.add(jtfGender); 
-        jpInfo.add(jblIcNo); 
+        jpInfo.add(jblIcNo);
+        jtfIcNo.setEditable(false);
         jpInfo.add(jtfIcNo); 
         jpInfo.add(jblSalary); 
+        jtfSalary.setEditable(false);
         jpInfo.add(jtfSalary); 
+        jpInfo.add(searchProfile);
         jpInfo.add(updateProfile);
         jpInfo.add(reset);
         
         add(jpInfo, BorderLayout.NORTH);
+        
+        SearchButtonListener listener3 = new SearchButtonListener();
+        searchProfile.addActionListener(listener3);
         
         UpdateProfileButtonListener listener = new UpdateProfileButtonListener();
         updateProfile.addActionListener(listener);
@@ -99,43 +110,66 @@ public class UpdateProfile extends JFrame{
         
     }
     
-      private class UpdateProfileButtonListener implements ActionListener {
-    @Override
-        public void actionPerformed(ActionEvent e) {
-            try{
-                 int id = Integer.parseInt(jtfID.getText());
-                 String name = jtfName.getText();
-                 String phone = jtfNo.getText();
-                 String add = jtfAdd.getText();
-                 String gender = jtfGender.getText();
-                 String icNo = jtfIcNo.getText();
-                double salary = Double.parseDouble(jtfSalary.getText());
-            
-           
-            boolean validateUpdate = false;
-            
-            validateUpdate = dpi.updateProfile(id, name, phone, add, gender, icNo, salary);        
-            if(validateUpdate==true){
-                jtaStaffList.setText(dpi.toProfileString());
-            }else if (validateUpdate==false){
-                jtaStaffList.setText("Invalid Inputs, Wrong ID inserted.");
+    private class SearchButtonListener implements ActionListener {
+        @Override
+            public void actionPerformed(ActionEvent e) {
+                    try{
+                        int id = Integer.parseInt(jtfID.getText());
+                        selectedProfile= deliveryProfileList.getSelectedProfile(id);
+                        jtfID.setText(""+selectedProfile.getStaffID());
+                        jtfName.setText(selectedProfile.getStaffName());
+                        jtfNo.setText(selectedProfile.getPhoneNo());
+                        jtfAdd.setText(selectedProfile.getAddress());
+                        jtfGender.setText(selectedProfile.getGender());
+                        jtfIcNo.setText(selectedProfile.getIcNo());
+                        jtfSalary.setText(""+selectedProfile.getSalary());
+                        jtfNo.setEditable(true);
+                        jtfAdd.setEditable(true);
+                        jtfSalary.setEditable(true);
+                    }catch (Exception ex){
+                          jtaStaffList.setText("Failed to get the selected profile.\n Error:" + ex.getMessage());
+                    }
             }
-           
-            clearText();
-            }catch(Exception ex){
-                jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage());
+     }
+    
+    private class UpdateProfileButtonListener implements ActionListener {
+        @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String phone = jtfNo.getText();
+                    String add = jtfAdd.getText();
+                    double salary = Double.parseDouble(jtfSalary.getText());
+                    selectedProfile.setPhoneNo(phone);
+                    selectedProfile.setSalary(salary);
+                    selectedProfile.setAddress(add);
+                    
+                    boolean validateUpdate = false;
+                    validateUpdate = deliveryProfileList.updateProfile(Integer.parseInt(jtfID.getText()),selectedProfile);        
+                    if(validateUpdate==true){
+                        new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
+                        jtaStaffList.setText(deliveryProfileList.toString());
+                    }else if (validateUpdate==false){
+                        jtaStaffList.setText("Invalid Inputs, Wrong ID inserted.");
+                    }
+                    new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
+               
+                    clearText();
+                }catch(Exception ex){
+                    jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage());
+                }
             }
         }
-    }
     
-      private class ResetButtonListener implements ActionListener {
+    private class ResetButtonListener implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent e) {
               clearText();
-              jtaStaffList.setText(dpi.toProfileString());
+              jtaStaffList.setText(deliveryProfileList.toString());
             }
      }
-      public void clearText(){
+    
+    
+    public void clearText(){
             jtfID.setText("");
             jtfName.setText("");
             jtfNo.setText("");
@@ -143,20 +177,11 @@ public class UpdateProfile extends JFrame{
             jtfGender.setText("");
             jtfIcNo.setText("");
             jtfSalary.setText("");
-     }
-      
-      private void initializeList() {
-      jtaStaffList.setText(dpi.toProfileString());
+    }
+    
+    private void initializeList() {
+            jtaStaffList.setText(deliveryProfileList.toString());
       }
       
-//       public static void main(String[] args) {
-//          UpdateProfile up = new UpdateProfile();
-//          up.getContentPane().setPreferredSize(new Dimension(600, 500));
-//          up.pack();
-//          up.setLocationRelativeTo(null);
-//          up.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//          up.setVisible(true);
-//    
-//  }
     
 }

@@ -11,81 +11,60 @@ import java.util.Random;
  * @author kevin lim
  */
 public class DeliveryMan {
-    private String staffName;
-    private int staffID;
-    private String phoneNo;
-    private String address;
-    private String status;
-    private String gender;
-    private String icNo;
-    private double Salary;
-    private String deliveryStatus;
-    private Random rand = new Random();
+    private String staffName;   // staff name (First name, Last name)
+    private int staffID;             // staff unique ID 
+    private String phoneNo;    // staff phone number
+    private String address;      // staff home addresses
+    private String status;        // "Staff", "Resigned" , "Retired"
+    private String gender;       // "Male", "Female"
+    private String icNo;           // staff identity card no
+    private double salary;       // staff salary (RM)
+    private String deliveryStatus;                  //"Delivering" , "Available"
+    private int pendingJobs;                         // sum of pending deliveries now
+    private int totalDeliveriesCompleted;     // sum of all the jobs done daily
+    private int kmTravelled;               // miles travelled per day (round up km)
+    private int yearsOfService;          // years of staying in the company
+    
+    private Random rand = new Random();     // for randomize staff id
 
     //this constructor for newly created id
-    public DeliveryMan(String staffName, String phoneNo, String address, String gender, String icNo, double Salary) {
+    public DeliveryMan(String staffName, String phoneNo, String address,
+            String gender, String icNo, double salary) {    
         this.staffName = staffName;
-        this.staffID = rand.nextInt((9999 - 1000) + 1) + 1000 ;
+        this.staffID = rand.nextInt((9999 - 1000) + 1) + 1000 ; // random number from 1000 - 9999
         this.phoneNo = phoneNo;
         this.address = address;
-        this.status = "staff";
+        this.status = "staff";   // "staff" by default
         this.gender = gender;
         this.icNo = icNo;
-        this.Salary = Salary;
-        this.deliveryStatus = "Available";
+        this.salary = salary;
+        this.deliveryStatus = "Available"; // "available" as default
+        this.pendingJobs = 0;                          //0
+        this.totalDeliveriesCompleted = 0;      //0
+        this.kmTravelled = 0;                           //0
+        this.yearsOfService=0;
     }
     
-    //this constructor for manually assign id
-    public DeliveryMan(String staffName,int staffId, String phoneNo, String address, String gender, String icNo, double Salary) {
+    //this constructor for predefined data
+    public DeliveryMan(String staffName, int staffID, String phoneNo, String address, String gender, String icNo, 
+            double salary, int pendingJobs, int totalDeliveriesCompleted, int kmTravelled,int yearsOfSevice) {
         this.staffName = staffName;
-        this.staffID = staffId ;
+        this.staffID = staffID; // random number from 1000 - 9999
         this.phoneNo = phoneNo;
         this.address = address;
-        this.status = "staff";
+        this.status = "staff";   // "staff" by default
         this.gender = gender;
         this.icNo = icNo;
-        this.Salary = Salary;
-        this.deliveryStatus = "Available";
+        this.salary = salary;
+        this.deliveryStatus = "Delivering"; // "available" as default
+        this.pendingJobs = pendingJobs;
+        this.totalDeliveriesCompleted = totalDeliveriesCompleted;
+        this.kmTravelled = kmTravelled;
+        this.yearsOfService = yearsOfSevice;
     }
-
-
+    
+    
     public DeliveryMan() {   }
-  
-
-    public double getSalary() {
-        return Salary;
-    }
-
-    public void setSalary(double Salary) {
-        this.Salary = Salary;
-    }
-
-    public String getDeliveryStatus() {
-        return deliveryStatus;
-    }
-
-    public void setDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
-    }
-    
-    
-    public String getIcNo() {
-        return icNo;
-    }
-
-    public void setIcNo(String icNo) {
-        this.icNo = icNo;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
- 
 
     public String getStaffName() {
         return staffName;
@@ -99,6 +78,9 @@ public class DeliveryMan {
         return staffID;
     }
 
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
 
     public String getPhoneNo() {
         return phoneNo;
@@ -124,12 +106,77 @@ public class DeliveryMan {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%-18s %-18s %-18s %-18s %-18s %-18s %-18s %-18s %-18s", staffName,staffID, phoneNo, address, status, gender, icNo, Salary, deliveryStatus);
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIcNo() {
+        return icNo;
+    }
+
+    public void setIcNo(String icNo) {
+        this.icNo = icNo;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    public int getPendingJobs() {
+        return pendingJobs;
+    }
+
+    public void setPendingJobs(int pendingJobs) {
+        this.pendingJobs = pendingJobs;
+    }
+
+    public int getTotalDeliveriesCompleted() {
+        return totalDeliveriesCompleted;
+    }
+
+    public void setTotalDeliveriesCompleted(int totalDeliveriesCompleted) {
+        this.totalDeliveriesCompleted = totalDeliveriesCompleted;
+    }
+
+    public int getKmTravelled() {
+        return kmTravelled;
+    }
+
+    public void setKmTravelled(int kmTravelled) {
+        this.kmTravelled = kmTravelled;
+    }
+
+    public int getYearsOfService() {
+        return yearsOfService;
+    }
+
+    public void setYearsOfService(int yearsOfService) {
+        this.yearsOfService = yearsOfService;
     }
     
-    public String toShortString() {
-        return String.format("%-18s %-18s %-18s", staffName,staffID, deliveryStatus);
+    public String toReportString() {
+        return String.format("%-20s%-20s%-25s%-25s%-25s",staffName,staffID,totalDeliveriesCompleted,kmTravelled,yearsOfService);
     }
+
+    public String toString() {
+        return String.format("%-18s%-18s%-18s%-18s%-18s%-20s%-20s%-18s%-25s%-20s%-20s%-20s%-20s", staffName, staffID, phoneNo, address, status, gender, icNo, salary, deliveryStatus, pendingJobs, totalDeliveriesCompleted, kmTravelled,yearsOfService);
+    }
+    
+    
 }

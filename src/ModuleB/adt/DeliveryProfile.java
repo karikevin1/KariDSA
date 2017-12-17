@@ -4,112 +4,176 @@
  * and open the template in the editor.
  */
 package ModuleB.adt;
-import ModuleB.adt.ListInterface;
-import ModuleB.adt.LList;
 import ModuleB.entity.DeliveryMan;
-import ModuleB.adt.DeliveryADT;
-import ModuleB.adt.DeliveryInterface;
 import ModuleB.entity.Delivery;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin lim
  */
-public class DeliveryProfile implements DeliveryProfileInterface {
-    private static final ListInterface <DeliveryMan> deliveryManList = new LList();
+public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
     
-    public DeliveryProfile(){
-         if(this.deliveryManList.isEmpty()){
-            DeliveryMan initializeList1, initializeList2, initializeList3, initializeList4;
-            initializeList1= new DeliveryMan("LimKH", 1234,"0162903850", "no2, jln6", "male", "970629-14-5571",2000.00);
-            initializeList2= new DeliveryMan("LimKW", 1111,"0162342850", "no2, jln6", "male", "971234-18-9911",1200.00);
-            initializeList3= new DeliveryMan("LowSK",3456, "0162203850", "no2, jln6", "female", "975050-90-1122",300.00);
-            initializeList4= new DeliveryMan("NgWD",9909, "0162987850", "no2, jln6", "male", "973020-87-2211",1000.00);        
-            this.deliveryManList.add(initializeList1);
-            this.deliveryManList.add(initializeList2);
-            this.deliveryManList.add(initializeList3);
-            this.deliveryManList.add(initializeList4);
+    private DeliveryManNode<T> firstMan;
+    private int numberOfMen;
+    
+        public DeliveryProfile(){
+             clear();
         }
-    }
     
-    public boolean createProfile (DeliveryMan dm){
-        boolean ans = false; 
-        int id = dm.getStaffID();
-        String name = dm.getStaffName();
-        for(int a=1 ; a <= deliveryManList.getNumberOfEntries(); a++){
-            if(id == deliveryManList.getEntry(a).getStaffID() && name == deliveryManList.getEntry(a).getStaffName()){
-                ans = false; 
-                return ans;
-            }
+        @Override
+        public final void clear() {
+          firstMan = null;
+          numberOfMen = 0;
         }
-        this.deliveryManList.add(dm);
-       
-                 
-        ans = true;
-        return ans;
-    }
-    
-    public boolean updateProfile(int Id,String name,String phone,String address,String gender,String IcNo, double salary){
-        boolean ans = false; 
-        for(int a=1 ; a <= deliveryManList.getNumberOfEntries(); a++){
-            if(Id == deliveryManList.getEntry(a).getStaffID()){
-               this.deliveryManList.getEntry(a).setStaffName(name);
-               this.deliveryManList.getEntry(a).setPhoneNo(phone);
-               this.deliveryManList.getEntry(a).setAddress(address);
-               this.deliveryManList.getEntry(a).setGender(gender);
-               this.deliveryManList.getEntry(a).setIcNo(IcNo);
-               this.deliveryManList.getEntry(a).setSalary(salary);
-               ans = true;
-            }
+
+        @Override
+        public boolean createProfile (T deliEntry){
+           DeliveryManNode <T> newMan = new DeliveryManNode<>(deliEntry);
+           
+           if(isEmpty())
+           {
+               firstMan = newMan;   
+           }else{
+              DeliveryManNode<T> lastMan = getNodeAt(numberOfMen);
+              lastMan.nextMan = newMan;
+           }
+           
+           numberOfMen++;
+           return true;
         }
         
-        return ans;
-    }
-    
-    public ListInterface <DeliveryMan> retrieveProfile(){
-        return this.deliveryManList;
-    }
-    
-    public DeliveryMan retrieveSelectedProfile(int ID){
-       DeliveryMan dm = new DeliveryMan();
-        for (int a=1;a <= deliveryManList.getNumberOfEntries();a++){
-            if (deliveryManList.getEntry(a).getStaffID()== ID){
-                dm = deliveryManList.getEntry(a);
-            }
-        }
-        return dm;
-    }
-    
-    public String retrievePendingList(int ID){
-        Delivery deli = new Delivery();
-        DeliveryInterface temp = new DeliveryADT();
-        int counter=0;
-        String replyString = "Free and Available";
-        for(int a =1 ;a <= temp.retrieveList().getNumberOfEntries();a++){
-            if (ID == temp.retrieveList().getEntry(a).getStaffID()){
-                if(temp.retrieveList().getEntry(a).getOrderNo()!=null){
-                    deli = temp.retrieveList().getEntry(a);
-                    replyString = deli.toShortString();
-                    return replyString;
+        @Override
+        public T getSelectedProfile(int Id){
+            T result = null;
+            DeliveryManNode currentMan = firstMan;
+            DeliveryMan temp = new DeliveryMan();
+            for (int counter = 1; counter <= numberOfMen; counter++) {
+                temp = (DeliveryMan)currentMan.man; 
+                if(temp.getStaffID() == Id){
+                   result =(T)currentMan.man;
+                }else{
+                    currentMan = currentMan.nextMan;
                 }
             }
+            return result;
         }
-        return replyString;
-    }
-    
-    
-    public String toProfileString(){
-        ListInterface <DeliveryMan> temp = retrieveProfile();
-        String outputString = "Staff name        StaffID           PhoneNo                Address         Status         Gender               ICNO                      Salary           DeliveryState\n";
-        outputString += temp.toString();
-        return outputString;
-    }
+        
+        @Override
+        public boolean updateProfile(int Id,T deliEntry){
+            boolean ans = false; 
+            DeliveryManNode currentMan = firstMan;
+            DeliveryMan temp = new DeliveryMan();
+            for (int counter = 1; counter <= numberOfMen; counter++) {
+                temp = (DeliveryMan)currentMan.man; 
+                if(temp.getStaffID() == Id){
+                    currentMan.man = deliEntry; 
+                    ans = true;
+                }else{
+                    currentMan = currentMan.nextMan;
+                }
+            }
+            return ans;
+        }
+        
+        @Override
+        public boolean updateStaffStatus(int Id, String status){
+            boolean ans = false; 
+            DeliveryManNode<T> currentMan = firstMan;
+            DeliveryMan temp = new DeliveryMan();
+            for (int counter = 1; counter <= numberOfMen; counter++) {
+                temp = (DeliveryMan)currentMan.man; 
+                if(temp.getStaffID() == Id){
+                    temp.setStatus(status);
+                    currentMan.man = (T)temp; 
+                    ans = true;
+                }else{
+                    currentMan = currentMan.nextMan;
+                }
+            }
+            return ans;
+        }
+        
+        @Override
+        public String toString() {
+            String outputString = String.format("%-18s%-18s%-18s%-18s%-18s%-18s%-20s%-20s%-18s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
+            DeliveryManNode<T> currentMan = firstMan;
+            while (currentMan != null){
+                outputString += "" + currentMan.man + "\n";
+                currentMan = currentMan.nextMan;
+            }
+           
+            return outputString;
+        }
+        
+        @Override
+        public String toReportString(){
+            String outputString = String.format("%-18s%-18s%-18s%-18s%-18s\n","StaffName","StaffID","TotalDeliveries","Distance","YearsServ");
+            DeliveryManNode<T> currentMan = firstMan;
+            int countGrandTotal =0;
+            while (currentMan != null){
+                DeliveryMan temp = (DeliveryMan)currentMan.man;
+                countGrandTotal += temp.getTotalDeliveriesCompleted();
+                outputString +=temp.toReportString()+"\n";
+                currentMan = currentMan.nextMan;
+            }
+            outputString += "\n"+ "Grand Total Delivery of all Delivery Man =  "+ countGrandTotal;
+           
+            return outputString;
+        }
+        
+        @Override
+        public T getPositionProfile(int givenPosition){
+            T result = null;
+            result = (T) getNodeAt(givenPosition).man;
+            return result;
+        }
+        
+        private DeliveryManNode<T> getNodeAt(int givenPosition) {
+           DeliveryManNode<T> currentMan = firstMan;
+
+           // traverse the list to locate the desired node
+           for (int counter = 1; counter < givenPosition; counter++) {
+             currentMan = currentMan.nextMan;
+           }
+           
+           return currentMan;
+        }
+        
+        @Override
+        public int getNumberOfEntries() {
+          return numberOfMen;
+        }
+        
+        @Override
+        public boolean isEmpty() {
+          boolean result;
+
+          result = numberOfMen == 0;
+
+          return result;
+        }
+        
+        @Override
+        public boolean isFull() {
+          return false;
+        }
+
+        private class DeliveryManNode<T> {
+
+          private T man;
+          private DeliveryManNode nextMan;
+
+          private DeliveryManNode(T man) {
+            this.man = man;
+            this.nextMan = null;
+          }
+
+          private DeliveryManNode(T man, DeliveryManNode nextMan) {
+            this.man = man;
+            this.nextMan = nextMan;
+          }
+        } // end Node
 }
+
+
+

@@ -12,19 +12,14 @@ import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfile;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.entity.DeliveryMan;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 
 /**
  *
  * @author kevin lim
  */
 public class CreateProfile extends JFrame {
-    private JLabel jblName = new JLabel("Delivery Man Name:");
+    private JLabel jblName = new JLabel("Delivery Man Name(ex.LimKH):");
     private JLabel jblNo = new JLabel("Phone No:");
     private JLabel jblAdd = new JLabel("Address:");
     private JLabel jblGender = new JLabel("Gender:");
@@ -34,20 +29,23 @@ public class CreateProfile extends JFrame {
     private JTextField jtfName = new JTextField();
     private JTextField jtfNo = new JTextField();
     private JTextField jtfAdd = new JTextField();
-    private JTextField jtfGender = new JTextField();
+    private JComboBox<String> jcbGender = new JComboBox<String>();
     private JTextField jtfIcNo = new JTextField();
     private JTextField jtfSalary = new JTextField();
     private JTextArea jtaStaffList = new JTextArea(20, 20);
     
     private JButton createProfile = new JButton("create");
     private JButton reset = new JButton("reset");
-    public DeliveryProfileInterface dpi = new DeliveryProfile();
+    public DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryManManagement().getList(); 
+    // get the list from the main page
+    
     
     public CreateProfile(){
         initializeList();
+        addGender();
         
         setTitle("Create Profile");
-        Font font = new Font("Arial", Font.BOLD, 18);
+        //Font font = new Font("Arial", Font.BOLD, 18);
         jblName.setHorizontalAlignment(SwingConstants.CENTER);
         jblNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblAdd.setHorizontalAlignment(SwingConstants.CENTER);
@@ -72,14 +70,13 @@ public class CreateProfile extends JFrame {
         jpInfo.add(jblAdd);
         jpInfo.add(jtfAdd);
         jpInfo.add(jblGender);
-        jpInfo.add(jtfGender);    
+        jpInfo.add(jcbGender);    
         jpInfo.add(jblIcNo); 
         jpInfo.add(jtfIcNo); 
         jpInfo.add(jblSalary); 
         jpInfo.add(jtfSalary); 
         jpInfo.add(createProfile);
         jpInfo.add(reset);
-       // jpInfo.add(back);
         add(jpInfo, BorderLayout.NORTH);
         
         CreateProfileButtonListener listener = new CreateProfileButtonListener();
@@ -99,13 +96,14 @@ public class CreateProfile extends JFrame {
                 String name = jtfName.getText();
                 String no = jtfNo.getText();
                 String add = jtfAdd.getText();
-                String gender = jtfGender.getText();
+                String gender = jcbGender.getSelectedItem().toString();
                 String IcNo = jtfIcNo.getText();
                 double salary = Double.parseDouble(jtfSalary.getText());
                 DeliveryMan dm = new DeliveryMan(name,no,add,gender,IcNo,salary);
 
-                dpi.createProfile(dm);
-                jtaStaffList.setText(dpi.toProfileString());
+                deliveryProfileList.createProfile(dm);
+                new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
+                jtaStaffList.setText(deliveryProfileList.toString());
                 clearText();
             }catch(Exception ex){
                 jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error: " + ex.getMessage());
@@ -113,35 +111,30 @@ public class CreateProfile extends JFrame {
         }
     }
     
-      private class ResetButtonListener implements ActionListener {
+    private class ResetButtonListener implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent e) {
               clearText();
-              jtaStaffList.setText(dpi.toProfileString());
+              jtaStaffList.setText(deliveryProfileList.toString());
             }
      }
-      
     
     public void clearText(){
             jtfName.setText("");
             jtfNo.setText("");
             jtfAdd.setText("");
-            jtfGender.setText("");
+            jcbGender.setSelectedIndex(0);
             jtfIcNo.setText("");
             jtfSalary.setText("");
     }
     
     private void initializeList() {
-      jtaStaffList.setText(dpi.toProfileString());
-  }
+      jtaStaffList.setText(deliveryProfileList.toString());
+    }
     
-//    public static void main(String[] args) {
-//          CreateProfile cp = new CreateProfile();
-//          cp.getContentPane().setPreferredSize(new Dimension(600, 500));
-//          cp.pack();
-//          cp.setLocationRelativeTo(null);
-//          cp.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//          cp.setVisible(true);
-//    
-//  }
+    private void addGender() {
+      jcbGender.addItem("Male");
+      jcbGender.addItem("Female");
+    }
+    
 }

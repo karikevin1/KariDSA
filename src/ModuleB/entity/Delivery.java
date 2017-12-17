@@ -9,7 +9,7 @@ package ModuleB.entity;
 
 /**
  *
- * @author kevin lim, Alex Ng
+ * @author kevin lim
  */
 public class Delivery {
     private String staffName;
@@ -82,11 +82,11 @@ public class Delivery {
 
     @Override
     public String toString() {
-        return String.format("%-18s %-18s %-18s %-18s %-18s %-18s", staffName,staffID,orderNo,customerName,customerContactNo,deliverymanStatus);
+        return String.format("%-18s%-18s%-18s%-18s%-18s%-18s", staffName,staffID,orderNo,customerName,customerContactNo,deliverymanStatus);
     }
     
     public String toShortString() {
-        return String.format("%-18s %-18s %-18s",orderNo,customerName,customerContactNo);
+        return String.format("%-18s%-18s%-18s",orderNo,customerName,customerContactNo);
     }
     
 }
