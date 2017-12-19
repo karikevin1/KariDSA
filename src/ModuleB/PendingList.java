@@ -5,12 +5,10 @@
  */
 package ModuleB;
 import ModuleB.adt.DeliveryInterface;
-import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
-import ModuleB.adt.DeliveryProfile;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.entity.Delivery;
 import ModuleB.entity.DeliveryMan;
@@ -87,12 +85,14 @@ public class PendingList extends JFrame{
                 temp = deliveryProfileList.getSelectedProfile(id);
                 jtfName.setText(temp.getStaffName());
                 String outputString ="";
-                
+                int counter =0; // count the pending task
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
                     if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
+                        counter++;
                         outputString += deliveryList.getSelectedDelivery(a).toShortString() + "\n";
                     }
                 }
+                outputString+= "\nTotal Pending jobs:" + counter; 
                 jtaStaffList.setText("OrderNo       CustName   CustomerContactNo\n"+outputString);
                  if(outputString.equals("")){
                      jtfStatus.setText("Free and Available");

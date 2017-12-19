@@ -4,21 +4,12 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
-import ModuleB.adt.DeliveryProfile;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.entity.DeliveryMan;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Date;
 
 /**
  *

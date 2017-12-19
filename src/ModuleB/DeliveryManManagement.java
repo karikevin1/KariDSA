@@ -150,16 +150,16 @@ public class DeliveryManManagement extends JFrame{
                     DeliveryMan initializeList1, initializeList2, initializeList3, initializeList4,
                             initializeList5,initializeList6,initializeList7,initializeList8,initializeList9,
                             initializeList10;
-                    initializeList1= new DeliveryMan("LimKH",1629,"0162903850", "no2, jln6", "Male", "970629-14-5571",2000.00,1,15,12,20);
-                    initializeList2= new DeliveryMan("LimKW",1111,"0162342850", "no2, jln6", "Male", "971234-18-9911",1200.00,2,20,14,1);
-                    initializeList3= new DeliveryMan("LowSK",3456,"0162203850", "no2, jln6", "Female", "975050-90-1122",2300.00,3,30,10,5);
-                    initializeList4= new DeliveryMan("NgWD",9909,"0162987850", "no2, jln6", "Male", "973020-87-2211",1000.00,1,5,11,8);        
-                    initializeList5= new DeliveryMan("LooJW",1233,"0162903850", "no2, jln6", "Female", "970529-14-5571",2000.00,2,11,18,19);
-                    initializeList6= new DeliveryMan("LimJJ",1012,"0162342850", "no2, jln6", "Male", "971214-18-9911",1200.00,3,12,5,10);
-                    initializeList7= new DeliveryMan("MahHW",3757,"0162203850", "no2, jln6", "Female", "970501-90-1122",2400.00,1,11,10,10);
-                    initializeList8= new DeliveryMan("LoiKH",9610,"0162987850", "no2, jln6", "Male", "971120-87-2211",1000.00,3,10,11,3); 
-                    initializeList9= new DeliveryMan("LimNF",5566,"0162903850", "no2, jln6", "Female", "970619-14-5571",2000.00,2,29,20,2);
-                    initializeList10= new DeliveryMan("LohKC",6969,"0162342850", "no2, jln6", "Male", "971134-18-9911",1200.00,1,17,20,3);
+                    initializeList1= new DeliveryMan("LimKH",1629,"0162903850", "no2, jln6", "Male", "970629-14-5571",2000.00,1,15,12,20);       //1 pend
+                    initializeList2= new DeliveryMan("LimKW",1111,"0162342850", "no2, jln6", "Male", "971234-18-9911",1200.00,2,20,14,1);       //2
+                    initializeList3= new DeliveryMan("LowSK",3456,"0162203850", "no2, jln6", "Female", "975050-90-1122",2300.00,3,30,10,5);     //3
+                    initializeList4= new DeliveryMan("NgWD",9909,"0162987850", "no2, jln6", "Male", "973020-87-2211",1000.00,1,5,11,8);             //1
+                    initializeList5= new DeliveryMan("LooJW",1233,"0162903850", "no2, jln6", "Female", "970529-14-5571",2000.00,2,11,18,19);        //2
+                    initializeList6= new DeliveryMan("LimJJ",1012,"0162342850", "no2, jln6", "Male", "971214-18-9911",1200.00,3,12,5,10);           //3
+                    initializeList7= new DeliveryMan("MahHW",3757,"0162203850", "no2, jln6", "Female", "970501-90-1122",2400.00,1,11,10,10);        //1
+                    initializeList8= new DeliveryMan("LoiKH",9610,"0162987850", "no2, jln6", "Male", "971120-87-2211",1000.00,3,10,11,3);           //2
+                    initializeList9= new DeliveryMan("LimNF",5566,"0162903850", "no2, jln6", "Female", "970619-14-5571",2000.00,2,29,20,2);         //3
+                    initializeList10= new DeliveryMan("LohKC",6969,"0162342850", "no2, jln6", "Male", "971134-18-9911",1200.00,1,17,20,3);          //1
                     this.deliveryProfileList.createProfile(initializeList1);
                     this.deliveryProfileList.createProfile(initializeList2);
                     this.deliveryProfileList.createProfile(initializeList3);

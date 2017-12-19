@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
-import ModuleB.adt.DeliveryProfile;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.entity.DeliveryMan;
 
