@@ -51,6 +51,7 @@ public class UpdateProfile extends JFrame{
         
         setTitle("Update Profile");
         jblName.setHorizontalAlignment(SwingConstants.CENTER);
+        jblID.setHorizontalAlignment(SwingConstants.CENTER);
         jblNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblAdd.setHorizontalAlignment(SwingConstants.CENTER);
         jblGender.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,6 +59,7 @@ public class UpdateProfile extends JFrame{
         jblSalary.setHorizontalAlignment(SwingConstants.CENTER);   
         
         jblName.setVerticalAlignment(SwingConstants.CENTER);
+        jblID.setVerticalAlignment(SwingConstants.CENTER);
         jblNo.setVerticalAlignment(SwingConstants.CENTER);
         jblAdd.setVerticalAlignment(SwingConstants.CENTER);
         jblGender.setVerticalAlignment(SwingConstants.CENTER);
