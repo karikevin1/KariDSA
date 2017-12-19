@@ -171,7 +171,7 @@ public class DeliveryMan {
     }
     
     public String toReportString() {
-        return String.format("%-20s%-20s%-25s%-25s%-25s",staffName,staffID,totalDeliveriesCompleted,kmTravelled,yearsOfService);
+        return String.format("%-20s%-25s%-25s%-25s%-25s",staffName,staffID,totalDeliveriesCompleted,kmTravelled,yearsOfService);
     }
 
     public String toString() {

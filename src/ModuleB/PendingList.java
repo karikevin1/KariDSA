@@ -10,7 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfileInterface;
-import ModuleD.adt.Schedule;
+import ModuleD.entity.Schedule;
 import ModuleB.entity.DeliveryMan;
 
 

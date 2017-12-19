@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.adt.DeliveryProfile;
 import ModuleB.entity.DeliveryMan;
-import ModuleD.adt.Schedule;
+import ModuleD.entity.Schedule;
 /**
  *
  * @author kevin lim
