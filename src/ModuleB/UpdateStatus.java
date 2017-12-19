@@ -103,10 +103,11 @@ public class UpdateStatus extends JFrame{
          }
          
          public void addID(){
+            jcbID.addItem(new ComboBoxObj("--Please Select--",0));
             for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
                 jcbID.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
                 deliveryProfileList.getPositionProfile(a).getStaffID()));
-            }      
+            }
          }
 
          public void clearText(){
