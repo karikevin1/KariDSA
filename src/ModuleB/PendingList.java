@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import ModuleB.adt.DeliveryInterface;
+import ModuleD.adt.DeliveryInterface;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

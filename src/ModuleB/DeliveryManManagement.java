@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import ModuleB.adt.DeliveryADT;
-import ModuleB.adt.DeliveryInterface;
+import ModuleD.adt.DeliveryADT;
+import ModuleD.adt.DeliveryInterface;
 import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
