@@ -26,7 +26,7 @@ public class UpdateProfile extends JFrame{
     private JLabel jblIcNo = new JLabel("Ic No:");
     private JLabel jblSalary = new JLabel("Salary(RM0.00):");
     
-    private JTextField jtfID = new JTextField();
+    private JComboBox<String> jcbID = new JComboBox<String>();
     private JTextField jtfName = new JTextField();
     private JTextField jtfNo = new JTextField();
     private JTextField jtfAdd = new JTextField();
@@ -36,7 +36,6 @@ public class UpdateProfile extends JFrame{
     
     private JTextArea jtaStaffList = new JTextArea(20, 20); // StaffList
     
-    private JButton searchProfile = new JButton("Search");
     private JButton updateProfile = new JButton("Update");
     private JButton reset = new JButton("reset");
     
@@ -46,6 +45,7 @@ public class UpdateProfile extends JFrame{
     private DeliveryMan selectedProfile = new DeliveryMan();
   
     public UpdateProfile(){
+        addID(); // put in staff id into the combobox
         initializeList();
         
         setTitle("Update Profile");
@@ -69,7 +69,8 @@ public class UpdateProfile extends JFrame{
         jtaStaffList.setEditable(false);
         JPanel jpInfo = new JPanel(new GridLayout(0,2));
         jpInfo.add(jblID);
-        jpInfo.add(jtfID);
+        jcbID.setVisible(true);
+        jpInfo.add(jcbID);
         jpInfo.add(jblName);
         jtfName.setEditable(false);
         jpInfo.add(jtfName);
@@ -88,14 +89,13 @@ public class UpdateProfile extends JFrame{
         jpInfo.add(jblSalary); 
         jtfSalary.setEditable(false);
         jpInfo.add(jtfSalary); 
-        jpInfo.add(searchProfile);
         jpInfo.add(updateProfile);
         jpInfo.add(reset);
         
         add(jpInfo, BorderLayout.NORTH);
         
         SearchButtonListener listener3 = new SearchButtonListener();
-        searchProfile.addActionListener(listener3);
+        jcbID.addActionListener(listener3);
         
         UpdateProfileButtonListener listener = new UpdateProfileButtonListener();
         updateProfile.addActionListener(listener);
@@ -112,9 +112,8 @@ public class UpdateProfile extends JFrame{
         @Override
             public void actionPerformed(ActionEvent e) {
                     try{
-                        int id = Integer.parseInt(jtfID.getText());
+                        int id = Integer.parseInt(jcbID.getSelectedItem().toString());
                         selectedProfile= deliveryProfileList.getSelectedProfile(id);
-                        jtfID.setText(""+selectedProfile.getStaffID());
                         jtfName.setText(selectedProfile.getStaffName());
                         jtfNo.setText(selectedProfile.getPhoneNo());
                         jtfAdd.setText(selectedProfile.getAddress());
@@ -142,7 +141,7 @@ public class UpdateProfile extends JFrame{
                     selectedProfile.setAddress(add);
                     
                     boolean validateUpdate = false;
-                    validateUpdate = deliveryProfileList.updateProfile(Integer.parseInt(jtfID.getText()),selectedProfile);        
+                    validateUpdate = deliveryProfileList.updateProfile(Integer.parseInt(jcbID.getSelectedItem().toString()),selectedProfile);        
                     if(validateUpdate==true){
                         new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
                         jtaStaffList.setText(deliveryProfileList.toString());
@@ -153,7 +152,7 @@ public class UpdateProfile extends JFrame{
                
                     clearText();
                 }catch(Exception ex){
-                    jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage());
+                    jtaStaffList.setText("No staff ID is selected.\n Error:" + ex.getMessage());
                 }
             }
         }
@@ -166,9 +165,14 @@ public class UpdateProfile extends JFrame{
             }
      }
     
+    public void addID(){
+        for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
+                jcbID.addItem(""+deliveryProfileList.getPositionProfile(a).getStaffID());
+        }      
+     }
     
     public void clearText(){
-            jtfID.setText("");
+            jcbID.setSelectedIndex(0);
             jtfName.setText("");
             jtfNo.setText("");
             jtfAdd.setText("");
