@@ -19,13 +19,13 @@ import ModuleB.entity.DeliveryMan;
  * @author kevin lim
  */
 public class PendingList extends JFrame{
-    private JLabel jblID = new JLabel("Delivery Man ID:");
     private JLabel jblName = new JLabel("Delivery Man Name:");
+    private JLabel jblID = new JLabel("Delivery Man ID:");
     private JLabel jblStatus = new JLabel("Delivery Status:");
     private JTextArea jtaStaffList = new JTextArea(20, 20); // StaffList
     
-    private JComboBox<String> jcbID = new JComboBox<String>();
-    private JTextField jtfName = new JTextField();
+    private JComboBox<ComboBoxObj> jcbName = new JComboBox<ComboBoxObj>();
+    private JTextField jtfID = new JTextField();
     private JTextField jtfStatus = new JTextField();
     
     private JButton searchProfile = new JButton("Search");
@@ -52,12 +52,12 @@ public class PendingList extends JFrame{
         
         jtaStaffList.setEditable(false);
         JPanel jpInfo = new JPanel(new GridLayout(4,2));
-        jpInfo.add(jblID);
-        jcbID.setVisible(true);
-        jpInfo.add(jcbID);
         jpInfo.add(jblName);
-        jtfName.setEditable(false);
-        jpInfo.add(jtfName);
+        jcbName.setVisible(true);
+        jpInfo.add(jcbName);
+        jpInfo.add(jblID);
+        jtfID.setEditable(false);
+        jpInfo.add(jtfID);
         jpInfo.add(jblStatus);
         jtfStatus.setEditable(false);
         jpInfo.add(jtfStatus);
@@ -80,10 +80,9 @@ public class PendingList extends JFrame{
     @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int id = Integer.parseInt(jcbID.getSelectedItem().toString());
-                DeliveryMan temp = new DeliveryMan();
-                temp = deliveryProfileList.getSelectedProfile(id);
-                jtfName.setText(temp.getStaffName());
+                ComboBoxObj temp = (ComboBoxObj)jcbName.getSelectedItem();
+                int id = temp.getValue();
+                jtfID.setText(""+id);
                 String outputString ="";
                 int counter =0; // count the pending task
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
@@ -94,7 +93,9 @@ public class PendingList extends JFrame{
                 }
                 outputString+= "\nTotal Pending jobs:" + counter; 
                 jtaStaffList.setText("OrderNo       CustName   CustomerContactNo\n"+outputString);
-                 if(outputString.equals("")){
+                 if(id == 0){
+                     jtfStatus.setText("Please select the staff name");
+                 }else if(counter == 0){
                      jtfStatus.setText("Free and Available");
                  }else{
                      jtfStatus.setText("Delivering");
@@ -113,14 +114,16 @@ public class PendingList extends JFrame{
      }
     
     public void addID(){
-        for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
-                jcbID.addItem(""+deliveryProfileList.getPositionProfile(a).getStaffID());
-        }      
-     }
+            jcbName.addItem(new ComboBoxObj("--Please Select--",0));
+            for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
+                jcbName.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
+                deliveryProfileList.getPositionProfile(a).getStaffID()));
+            }
+    }
     
     public void clearText(){
-         jcbID.setSelectedIndex(0);
-         jtfName.setText("");
+         jcbName.setSelectedIndex(0);
+         jtfID.setText("");
          jtfStatus.setText("");
          jtaStaffList.setText("");
      }

@@ -156,7 +156,7 @@ public class UpdateProfile extends JFrame{
                
                     clearText();
                 }catch(Exception ex){
-                    jtaStaffList.setText("No staff ID is selected.\n Error:" + ex.getMessage());
+                    jtaStaffList.setText("Please search before update.\n Error:" + ex.getMessage());
                 }
             }
         }
