@@ -30,6 +30,7 @@ public class UpdateStatus extends JFrame{
          //get the list from the main page
          
          public UpdateStatus(){
+            addID();
             initializeList();
             addStatus();
 
