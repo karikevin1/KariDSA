@@ -19,7 +19,7 @@ public class UpdateStatus extends JFrame{
          private JLabel jblID = new JLabel("Delivery Man ID:");
          private JLabel jblStatus = new JLabel("Delivery Man Status:");
          
-         private JTextField jtfID = new JTextField();
+         private JComboBox<ComboBoxObj> jcbID = new JComboBox<ComboBoxObj>();
          private JComboBox<String> jcbStatus = new JComboBox<String>();
          
          private JButton reset = new JButton("Reset");
@@ -43,79 +43,78 @@ public class UpdateStatus extends JFrame{
             jtaStaffList.setEditable(false);
             JPanel jpInfo = new JPanel(new GridLayout(3,2));
             jpInfo.add(jblID);
-            jpInfo.add(jtfID);
+            jcbID.setVisible(true);
+            jpInfo.add(jcbID);
             jpInfo.add(jblStatus);
             jpInfo.add(jcbStatus);
             jpInfo.add(reset);
             jpInfo.add(update);
             
             add(jpInfo, BorderLayout.NORTH);
-        
+            
             ResetButtonListener listener1 = new ResetButtonListener();
             reset.addActionListener(listener1);
             
             UpdateButtonListener listener2 = new UpdateButtonListener();
             update.addActionListener(listener2);
-
+                  
             JScrollPane scrollPane = new JScrollPane(jtaStaffList);
             add(scrollPane, BorderLayout.CENTER);
          }
          
-         
-        public void addStatus(){
-            jcbStatus.addItem("Resigned");
-            jcbStatus.addItem("Retired");
-        }
+         public void addStatus(){
+             jcbStatus.addItem("Resigned");
+             jcbStatus.addItem("Retired");
+         }
          
         
-        private class UpdateButtonListener implements ActionListener {
-        @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    int id = Integer.parseInt(jtfID.getText());
-                    String status = jcbStatus.getSelectedItem().toString();
-                    
-                    boolean validateUpdate = false;
-                    validateUpdate = deliveryProfileList.updateStaffStatus(id, status);        
-                    if(validateUpdate==true){
-                        new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
-                        jtaStaffList.setText(deliveryProfileList.toString());
-                    }else if (validateUpdate==false){
-                        jtaStaffList.setText("Invalid Inputs, Wrong ID inserted or Operation failed.");
-                    }
-                    new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
+         private class UpdateButtonListener implements ActionListener {
+         @Override
+             public void actionPerformed(ActionEvent e) {
+                 try{
+                     ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                     int id = temp.getValue();
+                     String status = jcbStatus.getSelectedItem().toString();
+                     
+                     boolean validateUpdate = false;
+                     validateUpdate = deliveryProfileList.updateStaffStatus(id, status);        
+                     if(validateUpdate==true){
+                         new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
+                         jtaStaffList.setText(deliveryProfileList.toString());
+                     }else if (validateUpdate==false){
+                         jtaStaffList.setText("Invalid Inputs, Wrong ID inserted or Operation failed.");
+                     }
+                     new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
                
-                    clearText();
-                }catch(Exception ex){
-                    jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage());
+                     clearText();
+                 }catch(Exception ex){
+                     jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage());
+                 }
+             }
+         }
+        
+         private class ResetButtonListener implements ActionListener {
+            @Override
+                public void actionPerformed(ActionEvent e) {
+                  clearText();
+                  jtaStaffList.setText(deliveryProfileList.toString());
                 }
-            }
-        }
-        
-        private class ResetButtonListener implements ActionListener {
-           @Override
-               public void actionPerformed(ActionEvent e) {
-                 clearText();
-                 jtaStaffList.setText(deliveryProfileList.toString());
-               }
-        }
+         }
+         
+         public void addID(){
+            for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
+                jcbID.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
+                deliveryProfileList.getPositionProfile(a).getStaffID()));
+            }      
+         }
 
-        public void clearText(){
-              jtfID.setText("");
-              jcbStatus.setSelectedIndex(0);
-        }
+         public void clearText(){
+               jcbID.setSelectedIndex(0);
+               jcbStatus.setSelectedIndex(0);
+         }
 
-        private void initializeList() {
-               jtaStaffList.setText(deliveryProfileList.toString());
-        }
+         private void initializeList() {
+                jtaStaffList.setText(deliveryProfileList.toString());
+         }
         
-        public static void main(String[] args) {
-          UpdateStatus frame = new UpdateStatus();
-          frame.getContentPane().setPreferredSize(new Dimension(600, 500));
-          frame.pack();
-          frame.setLocationRelativeTo(null);
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          frame.setVisible(true);
-          //frame.setResizable(false);
-        }
 }

@@ -94,14 +94,14 @@ public class UpdateProfile extends JFrame{
         
         add(jpInfo, BorderLayout.NORTH);
         
-        SearchButtonListener listener3 = new SearchButtonListener();
-        jcbID.addActionListener(listener3);
-        
         UpdateProfileButtonListener listener = new UpdateProfileButtonListener();
         updateProfile.addActionListener(listener);
         
         ResetButtonListener listener2 = new ResetButtonListener();
         reset.addActionListener(listener2);
+        
+        SearchButtonListener listener3 = new SearchButtonListener();
+        jcbID.addActionListener(listener3);
              
         JScrollPane scrollPane = new JScrollPane(jtaStaffList);
         add(scrollPane, BorderLayout.CENTER);
