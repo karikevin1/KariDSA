@@ -107,6 +107,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         
         @Override
         public String toReportString(){
+            sortBasedCompletedJobs();
             String outputString = String.format("%-18s%-18s%-18s%-18s%-18s\n","StaffName","StaffID","TotalDeliveries","Distance","YearsServ");
             DeliveryManNode<T> currentMan = firstMan;
             int countGrandTotal =0;
@@ -120,6 +121,25 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
            
             return outputString;
         }
+        
+        @Override
+        public void sortBasedCompletedJobs(){
+            for(int a = 1; a <= this.numberOfMen; a++ ){
+                    int bestDeliveryCount =0;
+                    DeliveryManNode<T> currentMan = getNodeAt(a);
+
+                    for(int b= a ; b <= numberOfMen; b++){
+                        DeliveryMan currentTemp = (DeliveryMan)currentMan.man;
+                        int currentCount = currentTemp.getTotalDeliveriesCompleted();
+                        if(currentCount > bestDeliveryCount){
+                            getNodeAt(a).man = (T)currentTemp;
+                            bestDeliveryCount = currentCount;
+                        }
+                        currentMan = currentMan.nextMan;
+                    }
+            }
+           
+        }        
         
         @Override
         public T getPositionProfile(int givenPosition){

@@ -63,8 +63,8 @@ public class DeliveryMan {
         this.yearsOfService = yearsOfSevice;
     }
     
-    
     public DeliveryMan() {   }
+   
 
     public String getStaffName() {
         return staffName;

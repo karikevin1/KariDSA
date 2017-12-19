@@ -24,6 +24,8 @@ public interface DeliveryProfileInterface<T> {
         // return all entries
         public String toReportString();
         // return report
+        public void sortBasedCompletedJobs();
+        // sort the list based on total completed jobs
         public T getPositionProfile(int givenPosition);
         // return selected position profile
         public int getNumberOfEntries() ;
