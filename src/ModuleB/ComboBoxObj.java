@@ -13,6 +13,10 @@ public class ComboBoxObj {
     private String indexName;
     private int value;
 
+    public ComboBoxObj() {
+    }
+
+    
     public ComboBoxObj(String indexName, int value) {
         this.indexName = indexName;
         this.value = value;
@@ -32,6 +36,11 @@ public class ComboBoxObj {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return indexName;
     }
     
     

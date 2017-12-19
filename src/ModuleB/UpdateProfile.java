@@ -26,7 +26,7 @@ public class UpdateProfile extends JFrame{
     private JLabel jblIcNo = new JLabel("Ic No:");
     private JLabel jblSalary = new JLabel("Salary(RM0.00):");
     
-    private JComboBox<String> jcbID = new JComboBox<String>();
+    private JComboBox<ComboBoxObj> jcbID = new JComboBox<ComboBoxObj>();
     private JTextField jtfName = new JTextField();
     private JTextField jtfNo = new JTextField();
     private JTextField jtfAdd = new JTextField();
@@ -112,7 +112,8 @@ public class UpdateProfile extends JFrame{
         @Override
             public void actionPerformed(ActionEvent e) {
                     try{
-                        int id = Integer.parseInt(jcbID.getSelectedItem().toString());
+                        ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                        int id = temp.getValue();
                         selectedProfile= deliveryProfileList.getSelectedProfile(id);
                         jtfName.setText(selectedProfile.getStaffName());
                         jtfNo.setText(selectedProfile.getPhoneNo());
@@ -141,7 +142,9 @@ public class UpdateProfile extends JFrame{
                     selectedProfile.setAddress(add);
                     
                     boolean validateUpdate = false;
-                    validateUpdate = deliveryProfileList.updateProfile(Integer.parseInt(jcbID.getSelectedItem().toString()),selectedProfile);        
+                    ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                    int id = temp.getValue();
+                    validateUpdate = deliveryProfileList.updateProfile(id,selectedProfile);        
                     if(validateUpdate==true){
                         new DeliveryManManagement().setList(deliveryProfileList); // update the list in the main page
                         jtaStaffList.setText(deliveryProfileList.toString());
@@ -167,7 +170,8 @@ public class UpdateProfile extends JFrame{
     
     public void addID(){
         for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
-                jcbID.addItem(""+deliveryProfileList.getPositionProfile(a).getStaffID());
+            jcbID.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
+            deliveryProfileList.getPositionProfile(a).getStaffID()));
         }      
      }
     
