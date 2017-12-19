@@ -16,10 +16,10 @@ import ModuleB.entity.DeliveryMan;
  * @author kevin lim
  */
 public class UpdateStatus extends JFrame{
-         private JLabel jblID = new JLabel("Delivery Man ID:");
+         private JLabel jblName = new JLabel("Delivery Man Name:");
          private JLabel jblStatus = new JLabel("Delivery Man Status:");
          
-         private JComboBox<ComboBoxObj> jcbID = new JComboBox<ComboBoxObj>();
+         private JComboBox<ComboBoxObj> jcbName = new JComboBox<ComboBoxObj>();
          private JComboBox<String> jcbStatus = new JComboBox<String>();
          
          private JButton reset = new JButton("Reset");
@@ -35,17 +35,17 @@ public class UpdateStatus extends JFrame{
             addStatus();
 
             setTitle("Update Resigned/Retired Status");
-            jblID.setHorizontalAlignment(SwingConstants.CENTER);
+            jblName.setHorizontalAlignment(SwingConstants.CENTER);
             jblStatus.setHorizontalAlignment(SwingConstants.CENTER);
             
-             jblID.setHorizontalAlignment(SwingConstants.CENTER);
+             jblName.setHorizontalAlignment(SwingConstants.CENTER);
              jblStatus.setHorizontalAlignment(SwingConstants.CENTER);
          
             jtaStaffList.setEditable(false);
             JPanel jpInfo = new JPanel(new GridLayout(3,2));
-            jpInfo.add(jblID);
-            jcbID.setVisible(true);
-            jpInfo.add(jcbID);
+            jpInfo.add(jblName);
+            jcbName.setVisible(true);
+            jpInfo.add(jcbName);
             jpInfo.add(jblStatus);
             jpInfo.add(jcbStatus);
             jpInfo.add(reset);
@@ -73,7 +73,7 @@ public class UpdateStatus extends JFrame{
          @Override
              public void actionPerformed(ActionEvent e) {
                  try{
-                     ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                     ComboBoxObj temp = (ComboBoxObj)jcbName.getSelectedItem();
                      int id = temp.getValue();
                      String status = jcbStatus.getSelectedItem().toString();
                      
@@ -103,15 +103,15 @@ public class UpdateStatus extends JFrame{
          }
          
          public void addID(){
-            jcbID.addItem(new ComboBoxObj("--Please Select--",0));
+            jcbName.addItem(new ComboBoxObj("--Please Select--",0));
             for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
-                jcbID.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
+                jcbName.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
                 deliveryProfileList.getPositionProfile(a).getStaffID()));
             }
          }
 
          public void clearText(){
-               jcbID.setSelectedIndex(0);
+               jcbName.setSelectedIndex(0);
                jcbStatus.setSelectedIndex(0);
          }
 

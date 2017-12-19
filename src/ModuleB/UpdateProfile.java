@@ -18,16 +18,16 @@ import ModuleB.entity.DeliveryMan;
  * @author kevin lim
  */
 public class UpdateProfile extends JFrame{
-    private JLabel jblID = new JLabel("Delivery Man ID:");
     private JLabel jblName = new JLabel("Delivery Man Name:");
+    private JLabel jblID = new JLabel("Delivery Man ID:");
     private JLabel jblNo = new JLabel("Phone No:");
     private JLabel jblAdd = new JLabel("Address:");
     private JLabel jblGender = new JLabel("Gender:");
     private JLabel jblIcNo = new JLabel("Ic No:");
     private JLabel jblSalary = new JLabel("Salary(RM0.00):");
     
-    private JComboBox<ComboBoxObj> jcbID = new JComboBox<ComboBoxObj>();
-    private JTextField jtfName = new JTextField();
+    private JComboBox<ComboBoxObj> jcbName = new JComboBox<ComboBoxObj>();
+    private JTextField jtfID = new JTextField();
     private JTextField jtfNo = new JTextField();
     private JTextField jtfAdd = new JTextField();
     private JTextField jtfGender = new JTextField();
@@ -36,6 +36,7 @@ public class UpdateProfile extends JFrame{
     
     private JTextArea jtaStaffList = new JTextArea(20, 20); // StaffList
     
+    private JButton searchProfile = new JButton("Search");
     private JButton updateProfile = new JButton("Update");
     private JButton reset = new JButton("reset");
     
@@ -49,8 +50,6 @@ public class UpdateProfile extends JFrame{
         initializeList();
         
         setTitle("Update Profile");
-       // Font font = new Font("Arial", Font.BOLD, 18);
-        jblID.setHorizontalAlignment(SwingConstants.CENTER);
         jblName.setHorizontalAlignment(SwingConstants.CENTER);
         jblNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblAdd.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,7 +57,6 @@ public class UpdateProfile extends JFrame{
         jblIcNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblSalary.setHorizontalAlignment(SwingConstants.CENTER);   
         
-        jblID.setHorizontalAlignment(SwingConstants.CENTER);
         jblName.setVerticalAlignment(SwingConstants.CENTER);
         jblNo.setVerticalAlignment(SwingConstants.CENTER);
         jblAdd.setVerticalAlignment(SwingConstants.CENTER);
@@ -68,12 +66,12 @@ public class UpdateProfile extends JFrame{
         
         jtaStaffList.setEditable(false);
         JPanel jpInfo = new JPanel(new GridLayout(0,2));
-        jpInfo.add(jblID);
-        jcbID.setVisible(true);
-        jpInfo.add(jcbID);
         jpInfo.add(jblName);
-        jtfName.setEditable(false);
-        jpInfo.add(jtfName);
+        jcbName.setVisible(true);
+        jpInfo.add(jcbName);
+        jpInfo.add(jblID);
+        jtfID.setEditable(false);
+        jpInfo.add(jtfID);
         jpInfo.add(jblNo);
         jtfNo.setEditable(false);
         jpInfo.add(jtfNo);
@@ -89,6 +87,7 @@ public class UpdateProfile extends JFrame{
         jpInfo.add(jblSalary); 
         jtfSalary.setEditable(false);
         jpInfo.add(jtfSalary); 
+        jpInfo.add(searchProfile);
         jpInfo.add(updateProfile);
         jpInfo.add(reset);
         
@@ -101,7 +100,7 @@ public class UpdateProfile extends JFrame{
         reset.addActionListener(listener2);
         
         SearchButtonListener listener3 = new SearchButtonListener();
-        jcbID.addActionListener(listener3);
+        searchProfile.addActionListener(listener3);
              
         JScrollPane scrollPane = new JScrollPane(jtaStaffList);
         add(scrollPane, BorderLayout.CENTER);
@@ -112,10 +111,10 @@ public class UpdateProfile extends JFrame{
         @Override
             public void actionPerformed(ActionEvent e) {
                     try{
-                        ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                        ComboBoxObj temp = (ComboBoxObj)jcbName.getSelectedItem();
                         int id = temp.getValue();
                         selectedProfile= deliveryProfileList.getSelectedProfile(id);
-                        jtfName.setText(selectedProfile.getStaffName());
+                        jtfID.setText(""+id);
                         jtfNo.setText(selectedProfile.getPhoneNo());
                         jtfAdd.setText(selectedProfile.getAddress());
                         jtfGender.setText(selectedProfile.getGender());
@@ -142,7 +141,7 @@ public class UpdateProfile extends JFrame{
                     selectedProfile.setAddress(add);
                     
                     boolean validateUpdate = false;
-                    ComboBoxObj temp = (ComboBoxObj)jcbID.getSelectedItem();
+                    ComboBoxObj temp = (ComboBoxObj)jcbName.getSelectedItem();
                     int id = temp.getValue();
                     validateUpdate = deliveryProfileList.updateProfile(id,selectedProfile);        
                     if(validateUpdate==true){
@@ -169,16 +168,16 @@ public class UpdateProfile extends JFrame{
      }
     
     public void addID(){
-        jcbID.addItem(new ComboBoxObj("--Please Select--",0));
+        jcbName.addItem(new ComboBoxObj("--Please Select--",0));
         for(int a=1 ; a <= deliveryProfileList.getNumberOfEntries();a++){
-            jcbID.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
+            jcbName.addItem(new ComboBoxObj(deliveryProfileList.getPositionProfile(a).getStaffName(),
             deliveryProfileList.getPositionProfile(a).getStaffID()));
         }
     }
     
     public void clearText(){
-            jcbID.setSelectedIndex(0);
-            jtfName.setText("");
+            jcbName.setSelectedIndex(0);
+            jtfID.setText("");
             jtfNo.setText("");
             jtfAdd.setText("");
             jtfGender.setText("");
