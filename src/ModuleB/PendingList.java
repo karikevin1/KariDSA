@@ -87,8 +87,11 @@ public class PendingList extends JFrame{
                 int counter =0; // count the pending task
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
                     if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
-                        counter++;
-                        outputString += deliveryList.getSelectedDelivery(a).toShortString()+ "\n";
+                        if(deliveryList.getSelectedDelivery(a).getDeliveryStatus().equals("Delivering")){
+                            counter++;
+                            outputString += deliveryList.getSelectedDelivery(a).toShortString()+ "\n";
+                        }
+                        
                     }
                 }
                 outputString+= "\nTotal Pending jobs:" + counter; 

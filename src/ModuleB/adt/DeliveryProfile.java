@@ -24,6 +24,8 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
           firstMan = null;
           numberOfMen = 0;
         }
+        
+        
 
         @Override
         public boolean createProfile (T deliEntry){
