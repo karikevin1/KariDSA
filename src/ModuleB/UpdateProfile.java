@@ -186,7 +186,7 @@ public class UpdateProfile extends JFrame{
     
     private void initializeList() {
             jtaStaffList.setText(deliveryProfileList.toString());
-      }
+    }
       
     
 }
