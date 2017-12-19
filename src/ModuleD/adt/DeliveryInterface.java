@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ModuleD.adt;
-import ModuleB.entity.Delivery;
+import ModuleD.adt.Schedule;
 
 /**
  *

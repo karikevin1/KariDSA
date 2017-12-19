@@ -13,8 +13,8 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.adt.DeliveryProfile;
-import ModuleB.entity.Delivery;
 import ModuleB.entity.DeliveryMan;
+import ModuleD.adt.Schedule;
 /**
  *
  * @author kevin lim
@@ -29,7 +29,7 @@ public class DeliveryManManagement extends JFrame{
     private JPanel jPanelAll = new JPanel();
     
     public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>(); // the super list object
-    public static DeliveryInterface<Delivery> deliveryList = new DeliveryADT<>();
+    public static DeliveryInterface<Schedule> deliveryList = new DeliveryADT<>();
     
     public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
         this.deliveryProfileList = deliveryProfileList;   // setter for super list object
@@ -39,13 +39,10 @@ public class DeliveryManManagement extends JFrame{
         return this.deliveryProfileList;      // getter for super list object
     }
      
-     public DeliveryInterface<Delivery> getDeliList (){
+     public DeliveryInterface<Schedule> getDeliList (){
         return this.deliveryList;      // getter for super list object
     }
      
-     public void setDeliList (DeliveryInterface<Delivery>deliveryList){
-        this.deliveryList = deliveryList;      // getter for super list object
-    }
     
     public DeliveryManManagement(){
         initialize();
@@ -173,22 +170,22 @@ public class DeliveryManManagement extends JFrame{
                 }
                 
                  if(this.deliveryList.isEmpty()){
-                    Delivery initializeList1, initializeList2, initializeList3, initializeList4,initializeList5,
+                    Schedule initializeList1, initializeList2, initializeList3, initializeList4,initializeList5,
                             initializeList6,initializeList7,initializeList8,initializeList9,
                             initializeList10,initializeList11,initializeList12,initializeList13;
-                    initializeList1= new Delivery("LimKH", 1629,"A01", "pewdiepie", "0162313212", "Delivering");
-                    initializeList2= new Delivery("LimKW", 1111,"A02", "MsTingTT", "012432434", "Delivering");
-                    initializeList3= new Delivery("LowSK",3456, "A03", "AhLiao", "01312321213", "Delivering");
-                    initializeList4= new Delivery("NgWD",9909, "A04", "Kazuma", "015213797", "Delivering");     
-                    initializeList5= new Delivery("LooJW",1233,"A05","Kalima","01124356","Delivering");
-                    initializeList6= new Delivery("LimJJ",1012,"A06", "LeongFoei", "01239909", "Delivering");
-                    initializeList7= new Delivery("MahHW",3757,"A07","KongKong","012283747","Delivering");
-                    initializeList8= new Delivery("LoiKH",9610,"A08","MigMing","012636383","Delivering"); 
-                    initializeList9= new Delivery("LimNF",5566,"A09","MsTing","0192726363","Delivering");
-                    initializeList10= new Delivery("LohKC",6969,"A10","KitKat","017265353","Delivering");
-                    initializeList11= new Delivery("LimKH", 1629,"A11", "Kari", "012213778", "Delivering");
-                    initializeList12= new Delivery("LimKH", 1629,"A12", "Yolo", "0162328212", "Delivering");
-                    initializeList13= new Delivery("LimKH", 1629,"A13", "Hahaha", "0198377213", "Delivering");
+                    initializeList1= new Schedule("A001","LimKH", 1629,"A01", "pewdiepie", "0162313212", "Delivering","5min");
+                    initializeList2= new Schedule("A002","LimKW", 1111,"A02", "MsTingTT", "012432434", "Delivering","5min");
+                    initializeList3= new Schedule("A003","LowSK",3456, "A03", "AhLiao", "01312321213", "Delivering","5min");
+                    initializeList4= new Schedule("A004","NgWD",9909, "A04", "Kazuma", "015213797", "Delivering","5min");     
+                    initializeList5= new Schedule("A005","LooJW",1233,"A05","Kalima","01124356","Delivering","5min");
+                    initializeList6= new Schedule("A006","LimJJ",1012,"A06", "LeongFoei", "01239909", "Delivering","5min");
+                    initializeList7= new Schedule("A007","MahHW",3757,"A07","KongKong","012283747","Delivering","5min");
+                    initializeList8= new Schedule("A008","LoiKH",9610,"A08","MigMing","012636383","Delivering","5min"); 
+                    initializeList9= new Schedule("A009","LimNF",5566,"A09","MsTing","0192726363","Delivering","5min");
+                    initializeList10= new Schedule("A010","LohKC",6969,"A10","KitKat","017265353","Delivering","5min");
+                    initializeList11= new Schedule("A011","LimKH", 1629,"A11", "Kari", "012213778", "Delivering","5min");
+                    initializeList12= new Schedule("A012","LimKH", 1629,"A12", "Yolo", "0162328212", "Delivering","5min");
+                    initializeList13= new Schedule("A013","LimKH", 1629,"A13", "Hahaha", "0198377213", "Delivering","5min");
                     this.deliveryList.createDelivery(initializeList1);
                     this.deliveryList.createDelivery(initializeList2);
                     this.deliveryList.createDelivery(initializeList3);

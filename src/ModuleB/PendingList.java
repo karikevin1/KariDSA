@@ -10,7 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfileInterface;
-import ModuleB.entity.Delivery;
+import ModuleD.adt.Schedule;
 import ModuleB.entity.DeliveryMan;
 
 
@@ -34,7 +34,7 @@ public class PendingList extends JFrame{
     public DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryManManagement().getList(); 
     // get the list from the main page
    
-    public DeliveryInterface<Delivery> deliveryList = new DeliveryManManagement().getDeliList(); 
+    public DeliveryInterface<Schedule> deliveryList = new DeliveryManManagement().getDeliList(); 
     // get the list from the main page
     
     int counter;
@@ -88,7 +88,7 @@ public class PendingList extends JFrame{
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
                     if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
                         counter++;
-                        outputString += deliveryList.getSelectedDelivery(a).toShortString() + "\n";
+                        outputString += deliveryList.getSelectedDelivery(a).toShortString()+ "\n";
                     }
                 }
                 outputString+= "\nTotal Pending jobs:" + counter; 

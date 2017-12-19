@@ -5,7 +5,7 @@
  */
 package ModuleD.adt;
 
-import ModuleB.entity.Delivery;
+import ModuleD.adt.Schedule;
 
 /**
  *

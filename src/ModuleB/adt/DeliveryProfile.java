@@ -5,7 +5,6 @@
  */
 package ModuleB.adt;
 import ModuleB.entity.DeliveryMan;
-import ModuleB.entity.Delivery;
 
 /**
  *

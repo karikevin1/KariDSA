@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package ModuleB.adt;
-import ModuleB.entity.DeliveryMan;
-import ModuleB.entity.Delivery;
+
 /**
  *
  * @author kevin lim
