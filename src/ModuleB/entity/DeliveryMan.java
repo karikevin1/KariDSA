@@ -175,7 +175,7 @@ public class DeliveryMan {
     }
 
     public String toString() {
-        return String.format("%-18s%-18s%-18s%-18s%-18s%-20s%-20s%-18s%-25s%-20s%-20s%-20s%-20s", staffName, staffID, phoneNo, address, status, gender, icNo, salary, deliveryStatus, pendingJobs, totalDeliveriesCompleted, kmTravelled,yearsOfService);
+        return String.format("%-18s%-18s%-20s%-18s%-18s%-20s%-25s%-18s%-25s%-25s%-25s%-25s%-25s", staffName, staffID, phoneNo, address, status, gender, icNo, salary, deliveryStatus, pendingJobs, totalDeliveriesCompleted, kmTravelled,yearsOfService);
     }
     
     

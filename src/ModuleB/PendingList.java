@@ -95,7 +95,7 @@ public class PendingList extends JFrame{
                     }
                 }
                 outputString+= "\nTotal Pending jobs:" + counter; 
-                jtaStaffList.setText("OrderNo       CustName   CustomerContactNo\n"+outputString);
+                jtaStaffList.setText(String.format("%-18s%-18s%-20s%-18s","ScheduleNo","OrderNo","CustName","CustomerContactNo")+"\n"+outputString);
                  if(id == 0){
                      jtfStatus.setText("Please select the staff name");
                  }else if(counter == 0){
