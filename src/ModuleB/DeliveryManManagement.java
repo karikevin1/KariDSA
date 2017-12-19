@@ -189,13 +189,13 @@ public class DeliveryManManagement extends JFrame{
                     initializeList11= new Schedule("A011","LimKH", 1629,"A11", "Kari", "012213778", "Delivering","5min");
                     initializeList12= new Schedule("A012","LimKW", 1111,"A12", "Yolo", "0162328212", "Delivering","5min");
                     initializeList13= new Schedule("A013","LowSK", 3456,"A13", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList14= new Schedule("A014","LowSK", 3456,"A14", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList15= new Schedule("A014","LooJW", 1233,"A15", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList16= new Schedule("A014","LimJJ", 1012,"A16", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList17= new Schedule("A014","LimJJ", 1012,"A17", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList18= new Schedule("A014","LoiKH", 9610,"A18", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList19= new Schedule("A014","LimNF", 5566,"A19", "Hahaha", "0198377213", "Delivering","5min");
-                    initializeList20= new Schedule("A014","LimNF", 5566,"A20", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList14= new Schedule("A015","LowSK", 3456,"A14", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList15= new Schedule("A016","LooJW", 1233,"A15", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList16= new Schedule("A017","LimJJ", 1012,"A16", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList17= new Schedule("A018","LimJJ", 1012,"A17", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList18= new Schedule("A019","LoiKH", 9610,"A18", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList19= new Schedule("A020","LimNF", 5566,"A19", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList20= new Schedule("A021","LimNF", 5566,"A20", "Hahaha", "0198377213", "Delivering","5min");
                     this.deliveryList.createDelivery(initializeList1);
                     this.deliveryList.createDelivery(initializeList2);
                     this.deliveryList.createDelivery(initializeList3);
@@ -208,6 +208,7 @@ public class DeliveryManManagement extends JFrame{
                     this.deliveryList.createDelivery(initializeList10);
                     this.deliveryList.createDelivery(initializeList11);
                     this.deliveryList.createDelivery(initializeList12);
+                    this.deliveryList.createDelivery(initializeList13);
                     this.deliveryList.createDelivery(initializeList14);
                     this.deliveryList.createDelivery(initializeList15);
                     this.deliveryList.createDelivery(initializeList16);
