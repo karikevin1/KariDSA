@@ -18,7 +18,7 @@ public class DeliveryMan {
     private String status;        // "Staff", "Resigned" , "Retired"
     private String gender;       // "Male", "Female"
     private String icNo;           // staff identity card no
-    private double salary;       // staff salary (RM)
+    private double salary;        // staff salary (RM)
     private String deliveryStatus;                  //"Delivering" , "Available"
     private int pendingJobs;                         // sum of pending deliveries now
     private int totalDeliveriesCompleted;     // sum of all the jobs done daily
