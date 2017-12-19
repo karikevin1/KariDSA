@@ -124,12 +124,11 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         
         @Override
         public void sortBasedCompletedJobs(){
-            for(int a = 1; a <= this.numberOfMen; a++ ){
+            DeliveryManNode<T> sortMan = firstMan;
+            for(int a = 1; a <= this.numberOfMen; a++){
                     int bestDeliveryCount =0;
-                    DeliveryManNode<T> sortMan = getNodeAt(a);
-
+                    DeliveryManNode<T> currentMan = sortMan;
                     for(int b= a ; b <= numberOfMen; b++){
-                        DeliveryManNode<T> currentMan = getNodeAt(b);
                         DeliveryMan currentTemp = (DeliveryMan)currentMan.man;
                         int currentCount = currentTemp.getTotalDeliveriesCompleted();
                         if(currentCount > bestDeliveryCount){
@@ -138,7 +137,9 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
                             currentMan.man = temp;
                             bestDeliveryCount = currentCount;
                         }
+                        currentMan = currentMan.nextMan;
                     }
+                    sortMan = sortMan.nextMan;
             }
            
         }        
