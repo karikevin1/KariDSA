@@ -84,7 +84,7 @@ public class PendingList extends JFrame{
                 int id = temp.getValue();
                 jtfID.setText(""+id);
                 String outputString ="";
-                int counter =0; // count the pending task
+                //int counter =0; // count the pending task
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
                     if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
                         if(deliveryList.getSelectedDelivery(a).getDeliveryStatus().equals("Delivering")){
@@ -98,10 +98,10 @@ public class PendingList extends JFrame{
                 jtaStaffList.setText(String.format("%-18s%-18s%-20s%-18s","ScheduleNo","OrderNo","CustName","CustomerContactNo")+"\n"+outputString);
                  if(id == 0){
                      jtfStatus.setText("Please select the staff name");
-                 }else if(counter == 0){
-                     jtfStatus.setText("Free and Available");
-                 }else{
-                     jtfStatus.setText("Delivering");
+                 }else if(deliveryProfileList.getSelectedProfile(id).getDeliveryStatus().equals("Available")){
+                     jtfStatus.setText("Free and "+deliveryProfileList.getSelectedProfile(id).getDeliveryStatus());
+                 }else if(deliveryProfileList.getSelectedProfile(id).getDeliveryStatus().equals("Delivering")){
+                     jtfStatus.setText(deliveryProfileList.getSelectedProfile(id).getDeliveryStatus());
                  }
             }catch(Exception ex){
                  jtaStaffList.setText("Invalid Input due to invalid inputs.\n Error:" + ex.getMessage() );

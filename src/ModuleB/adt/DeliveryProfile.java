@@ -147,6 +147,30 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         }        
         
         @Override
+        public void setDeliveryStatus(int Id,String status,boolean pending,boolean completed){
+            DeliveryManNode<T> currentMan = firstMan;
+            DeliveryMan temp = new DeliveryMan();
+            for (int counter = 1; counter <= numberOfMen; counter++) {
+                temp = (DeliveryMan)currentMan.man; 
+                if(temp.getStaffID() == Id){
+                    temp.setDeliveryStatus(status);
+                    if(pending == true){
+                        int temp1 = temp.getPendingJobs();
+                        temp.setPendingJobs(temp1++);
+                    }else if(completed == true){
+                        int temp1 = temp.getTotalDeliveriesCompleted();
+                        int temp2 = temp.getPendingJobs();
+                        temp.setPendingJobs(--temp2);
+                        temp.setTotalDeliveriesCompleted(temp1++);
+                    }
+                    currentMan.man = (T)temp; 
+                }else{
+                    currentMan = currentMan.nextMan;
+                }
+            }
+        }
+        
+        @Override
         public T getPositionProfile(int givenPosition){
             T result = null;
             result = (T) getNodeAt(givenPosition).man;
