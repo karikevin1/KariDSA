@@ -103,7 +103,7 @@ public class Schedule {
     }
     
     public String toShortString() {
-        return String.format("%-25s%-24s%-30s%-20s",scheduleID,orderID,customerName,customerContactNo);
+        return String.format("%-18s%-18s%-18s",orderID,customerName,customerContactNo);
     }
     
 }

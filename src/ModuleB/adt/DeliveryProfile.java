@@ -123,6 +123,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         }
         
         @Override
+        // this is a selection sort that sort the profile list according to best delivery man
         public void sortBasedCompletedJobs(){
             DeliveryManNode<T> sortMan = firstMan;
             for(int a = 1; a <= this.numberOfMen; a++){
