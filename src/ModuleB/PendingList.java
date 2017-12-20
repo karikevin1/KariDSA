@@ -37,7 +37,6 @@ public class PendingList extends JFrame{
     public DeliveryInterface<Schedule> deliveryList = new DeliveryManManagement().getDeliList(); 
     // get the list from the main page
     
-    int counter;
     
     public PendingList(){
         addID(); // put in staff id into the combobox
@@ -84,12 +83,12 @@ public class PendingList extends JFrame{
                 int id = temp.getValue();
                 jtfID.setText(""+id);
                 String outputString ="";
-                //int counter =0; // count the pending task
+                int counter =0; // count the pending task
                 for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
                     if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
                         if(deliveryList.getSelectedDelivery(a).getDeliveryStatus().equals("Delivering")){
-                            counter++;
                             outputString += deliveryList.getSelectedDelivery(a).toShortString()+ "\n";
+                            counter++;
                         }
                         
                     }
