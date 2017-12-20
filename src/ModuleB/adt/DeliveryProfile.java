@@ -95,7 +95,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         
         @Override
         public String toString() {
-            String outputString = String.format("%-18s%-18s%-18s%-18s%-18s%-18s%-30s%-20s%-18s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
+            String outputString = String.format("%-18s%-18s%-23s%-20s%-18s%-18s%-30s%-20s%-18s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
             DeliveryManNode<T> currentMan = firstMan;
             while (currentMan != null){
                 outputString += "" + currentMan.man + "\n";
