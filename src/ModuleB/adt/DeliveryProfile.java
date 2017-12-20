@@ -127,21 +127,23 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
             DeliveryManNode<T> sortMan = firstMan;
             for(int a = 1; a <= this.numberOfMen; a++){
                     int bestDeliveryCount =0;
-                    DeliveryManNode<T> currentMan = sortMan;
+                    DeliveryManNode<T> currentMan = sortMan;      
+                    //first loop to differentiate sorted part & unsorted part
                     for(int b= a ; b <= numberOfMen; b++){
                         DeliveryMan currentTemp = (DeliveryMan)currentMan.man;
                         int currentCount = currentTemp.getTotalDeliveriesCompleted();
-                        if(currentCount > bestDeliveryCount){
-                            T temp = sortMan.man;
-                            sortMan.man = currentMan.man;
-                            currentMan.man = temp;
+                        //compare entity behaviour, always swap the highest with the to be sorted position
+                        if(currentCount > bestDeliveryCount){       
+                            T temp = sortMan.man;                       //store the selected position to be part of sorted
+                            sortMan.man = currentMan.man;        //swap the highest score with the selected position
+                            currentMan.man = temp;                    //swap the storage of the selected position to the highest score position
                             bestDeliveryCount = currentCount;
                         }
                         currentMan = currentMan.nextMan;
                     }
+                    
                     sortMan = sortMan.nextMan;
-            }
-           
+            }   
         }        
         
         @Override
