@@ -46,7 +46,6 @@ public class DeliveryManManagement extends JFrame{
      
     
     public DeliveryManManagement(){
-        new Client();
         initialize();
         setTitle("Delivery Man Management subsystem (HR subsystem)");
         Font fontInstruction = new Font("Arial", Font.BOLD, 36);
