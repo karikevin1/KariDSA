@@ -29,6 +29,9 @@ public class DeliveryManManagement extends JFrame{
     private JButton dailyProfile = new JButton("DailyReport");
     private JPanel jPanelAll = new JPanel();
     
+    private JComboBox<ComboBoxObj> sortBox = new JComboBox<ComboBoxObj>();
+    private JButton sortButton = new JButton("Sort List");
+    
     public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>(); // the super list object
     public static ScheduleInterface<Schedule> deliveryList = new Client().getDeliList();
     
@@ -80,6 +83,17 @@ public class DeliveryManManagement extends JFrame{
         updateStatus.addActionListener(listener4);
         DailyProfileButtonListener listener5 = new DailyProfileButtonListener();
         dailyProfile.addActionListener(listener5);
+        
+        JPanel jpSort = new JPanel(new FlowLayout());
+        sortBox.addItem(new ComboBoxObj("--Select Sorting Type--",0));
+        sortBox.addItem(new ComboBoxObj("--Years of Services--",1));
+        sortBox.addItem(new ComboBoxObj("--Pending jobs count--",2));
+        jpSort.add(sortBox);
+        jpSort.add(sortButton);
+        jPanelAll.add(jpSort, BorderLayout.SOUTH);
+        
+        SortButtonListener listener6 = new SortButtonListener();
+        sortButton.addActionListener(listener6);
         add(jPanelAll);
     }
     
@@ -143,6 +157,18 @@ public class DeliveryManManagement extends JFrame{
         }
     }
     
+    private class SortButtonListener implements ActionListener{
+         @Override
+        public void actionPerformed(ActionEvent e) {
+            ComboBoxObj temp = (ComboBoxObj)sortBox.getSelectedItem();
+            if(temp.getValue() == 1){
+                deliveryProfileList.sortBasedYearService();
+            }else if(temp.getValue() == 2){
+                deliveryProfileList.sortBasedPendingJobs();
+            }
+        }
+    }
+    
     private void initialize(){
                 if(this.deliveryProfileList.isEmpty()){
                     DeliveryMan initializeList1, initializeList2, initializeList3, initializeList4,
@@ -155,8 +181,8 @@ public class DeliveryManManagement extends JFrame{
                     initializeList5= new DeliveryMan("LooJW",1233,"0162903850", "no2, jln6", "Female", "970529-14-5571",2000.00,2,11,18,19);     //2
                     initializeList6= new DeliveryMan("LimJW",1012,"0162342850", "no2, jln6", "Male", "971214-18-9911",1200.00,3,12,5,10);            //3
                     initializeList7= new DeliveryMan("MahJW",3757,"0162203850", "no2, jln6", "Female", "970501-90-1122",2400.00,1,11,10,10);    //1
-                    initializeList8= new DeliveryMan("LoiKW",9610,"0162987850", "no2, jln6", "Male", "971120-87-2211",1000.00,3,10,11,3);            //2
-                    initializeList9= new DeliveryMan("LimNF",5566,"0162903850", "no2, jln6", "Female", "970619-14-5571",2000.00,2,29,20,2);        //3
+                    initializeList8= new DeliveryMan("LoiKW",9610,"0162987850", "no2, jln6", "Male", "971120-87-2211",1000.00,2,10,11,3);            //2
+                    initializeList9= new DeliveryMan("LimNF",5566,"0162903850", "no2, jln6", "Female", "970619-14-5571",2000.00,3,29,20,2);        //3
                     initializeList10= new DeliveryMan("LohKC",6969,"0162342850", "no2, jln6", "Male", "971134-18-9911",1200.00,1,17,20,3);          //1
                     this.deliveryProfileList.createProfile(initializeList1);
                     this.deliveryProfileList.createProfile(initializeList2);

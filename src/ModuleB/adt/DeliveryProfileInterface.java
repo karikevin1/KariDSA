@@ -26,6 +26,10 @@ public interface DeliveryProfileInterface<T> {
         // return report
         public void sortBasedCompletedJobs();
         // sort the list based on total completed jobs
+        public void sortBasedYearService();
+        // sort the list based on year of services
+        public void sortBasedPendingJobs();
+        // sort the list based on pendingJobs
         public void setDeliveryStatus(int Id,String status,boolean pending,boolean completed);
         // For Module D
         public T getPositionProfile(int givenPosition);

@@ -25,6 +25,7 @@ public class UpdateProfile extends JFrame{
     private JLabel jblGender = new JLabel("Gender:");
     private JLabel jblIcNo = new JLabel("Ic No:");
     private JLabel jblSalary = new JLabel("Salary(RM0.00):");
+    private JLabel jblYear = new JLabel("Year Of Services to company:");
     
     private JComboBox<ComboBoxObj> jcbName = new JComboBox<ComboBoxObj>();
     private JTextField jtfID = new JTextField();
@@ -33,6 +34,7 @@ public class UpdateProfile extends JFrame{
     private JTextField jtfGender = new JTextField();
     private JTextField jtfIcNo = new JTextField();
     private JTextField jtfSalary = new JTextField();
+    private JTextField jtfYear = new JTextField();
     
     private JTextArea jtaStaffList = new JTextArea(20, 20); // StaffList
     
@@ -57,6 +59,7 @@ public class UpdateProfile extends JFrame{
         jblGender.setHorizontalAlignment(SwingConstants.CENTER);
         jblIcNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblSalary.setHorizontalAlignment(SwingConstants.CENTER);   
+        jblYear.setHorizontalAlignment(SwingConstants.CENTER);   
         
         jblName.setVerticalAlignment(SwingConstants.CENTER);
         jblID.setVerticalAlignment(SwingConstants.CENTER);
@@ -65,6 +68,7 @@ public class UpdateProfile extends JFrame{
         jblGender.setVerticalAlignment(SwingConstants.CENTER);
         jblIcNo.setHorizontalAlignment(SwingConstants.CENTER);
         jblSalary.setHorizontalAlignment(SwingConstants.CENTER);   
+        jblYear.setHorizontalAlignment(SwingConstants.CENTER);   
         
         jtaStaffList.setEditable(false);
         JPanel jpInfo = new JPanel(new GridLayout(0,2));
@@ -89,6 +93,9 @@ public class UpdateProfile extends JFrame{
         jpInfo.add(jblSalary); 
         jtfSalary.setEditable(false);
         jpInfo.add(jtfSalary); 
+        jpInfo.add(jblYear); 
+        jtfYear.setEditable(false);
+        jpInfo.add(jtfYear); 
         jpInfo.add(searchProfile);
         jpInfo.add(updateProfile);
         jpInfo.add(reset);
@@ -122,9 +129,11 @@ public class UpdateProfile extends JFrame{
                         jtfGender.setText(selectedProfile.getGender());
                         jtfIcNo.setText(selectedProfile.getIcNo());
                         jtfSalary.setText(""+selectedProfile.getSalary());
+                        jtfYear.setText(""+selectedProfile.getYearsOfService());
                         jtfNo.setEditable(true);
                         jtfAdd.setEditable(true);
                         jtfSalary.setEditable(true);
+                        jtfYear.setEditable(true);
                     }catch (Exception ex){
                           jtaStaffList.setText("Failed to get the selected profile.\n Error:" + ex.getMessage());
                     }
@@ -138,9 +147,11 @@ public class UpdateProfile extends JFrame{
                     String phone = jtfNo.getText();
                     String add = jtfAdd.getText();
                     double salary = Double.parseDouble(jtfSalary.getText());
+                    int year = Integer.parseInt(jtfYear.getText());
                     selectedProfile.setPhoneNo(phone);
                     selectedProfile.setSalary(salary);
                     selectedProfile.setAddress(add);
+                    selectedProfile.setYearsOfService(year);
                     
                     boolean validateUpdate = false;
                     ComboBoxObj temp = (ComboBoxObj)jcbName.getSelectedItem();
@@ -185,9 +196,11 @@ public class UpdateProfile extends JFrame{
             jtfGender.setText("");
             jtfIcNo.setText("");
             jtfSalary.setText("");
+            jtfYear.setText("");
             jtfNo.setEditable(false);
             jtfAdd.setEditable(false);
             jtfSalary.setEditable(false);
+            jtfYear.setEditable(false);
     }
     
     private void initializeList() {

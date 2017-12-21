@@ -95,7 +95,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         
         @Override
         public String toString() {
-            String outputString = String.format("%-18s%-18s%-23s%-20s%-18s%-18s%-30s%-20s%-18s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
+            String outputString = String.format("%-18s%-18s%-23s%-20s%-18s%-18s%-30s%-20s%-23s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
             DeliveryManNode<T> currentMan = firstMan;
             while (currentMan != null){
                 outputString += "" + currentMan.man + "\n";
@@ -123,7 +123,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
         }
         
         @Override
-        // this is a selection sort that sort the profile list according to best delivery man
+        // this is a selection sort that sort the profile list according to best delivery man ( total completed deliveries )
         public void sortBasedCompletedJobs(){
             DeliveryManNode<T> sortMan = firstMan;
             for(int a = 1; a <= this.numberOfMen; a++){
@@ -145,7 +145,55 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
                     
                     sortMan = sortMan.nextMan;
             }   
-        }        
+        }    
+        
+        @Override
+        // this is a selection sort that sort the profile list according to experience (years of services)
+        public void sortBasedYearService(){
+            DeliveryManNode<T> sortMan = firstMan;
+            for(int a = 1; a <= this.numberOfMen; a++){
+                    int bestExperienceCount =0;
+                    DeliveryManNode<T> currentMan = sortMan;      
+                    //first loop to differentiate sorted part & unsorted part
+                    for(int b= a ; b <= numberOfMen; b++){
+                        DeliveryMan currentTemp = (DeliveryMan)currentMan.man;
+                        int currentCount = currentTemp.getYearsOfService();
+                        //compare entity behaviour, always swap the highest with the to be sorted position
+                        if(currentCount > bestExperienceCount){       
+                            T temp = sortMan.man;                       //store the selected position to be part of sorted
+                            sortMan.man = currentMan.man;        //swap the highest score with the selected position
+                            currentMan.man = temp;                    //swap the storage of the selected position to the highest score position
+                            bestExperienceCount = currentCount;
+                        }
+                        currentMan = currentMan.nextMan;
+                    }
+                    
+                    sortMan = sortMan.nextMan;
+            }   
+        }
+        @Override
+        public void sortBasedPendingJobs(){
+            DeliveryManNode<T> sortMan = firstMan;
+            for(int a = 1; a <= this.numberOfMen; a++){
+                    int lowestPending = 10000;
+                    DeliveryManNode<T> currentMan = sortMan;      
+                    //first loop to differentiate sorted part & unsorted part
+                    for(int b= a ; b <= numberOfMen; b++){
+                        DeliveryMan currentTemp = (DeliveryMan)currentMan.man;
+                        int currentCount = currentTemp.getPendingJobs();
+                        //compare entity behaviour, always swap the highest with the to be sorted position
+                        if(currentCount < lowestPending){       
+                            T temp = sortMan.man;                       //store the selected position to be part of sorted
+                            sortMan.man = currentMan.man;        //swap the highest score with the selected position
+                            currentMan.man = temp;                    //swap the storage of the selected position to the highest score position
+                            lowestPending = currentCount;
+                        }
+                        currentMan = currentMan.nextMan;
+                    }
+                    
+                    sortMan = sortMan.nextMan;
+            } 
+        }
         
         @Override
         public void setDeliveryStatus(int Id,String status,boolean pending,boolean completed){
