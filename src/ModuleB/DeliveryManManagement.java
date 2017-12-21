@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import ModuleD.adt.DeliveryADT;
-import ModuleD.adt.DeliveryInterface;
 import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +13,8 @@ import ModuleB.adt.DeliveryProfileInterface;
 import ModuleB.adt.DeliveryProfile;
 import ModuleB.entity.DeliveryMan;
 import ModuleD.Client;
+import ModuleD.adt.ScheduleInterface;
+import ModuleD.adt.ScheduleADT;
 import ModuleD.entity.Schedule;
 /**
  *
@@ -30,7 +30,7 @@ public class DeliveryManManagement extends JFrame{
     private JPanel jPanelAll = new JPanel();
     
     public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>(); // the super list object
-    public static DeliveryInterface<Schedule> deliveryList = new Client().getDeliList();
+    public static ScheduleInterface<Schedule> deliveryList = new Client().getDeliList();
     
     public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
         this.deliveryProfileList = deliveryProfileList;   // setter for super list object
@@ -40,12 +40,13 @@ public class DeliveryManManagement extends JFrame{
         return this.deliveryProfileList;      // getter for super list object
     }
      
-    public DeliveryInterface<Schedule> getDeliList (){
+    public ScheduleInterface<Schedule> getDeliList (){
         return this.deliveryList;      // getter for super list object
     }
      
     
     public DeliveryManManagement(){
+        new Client();
         initialize();
         setTitle("Delivery Man Management subsystem (HR subsystem)");
         Font fontInstruction = new Font("Arial", Font.BOLD, 36);

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package ModuleB;
-import ModuleD.adt.DeliveryInterface;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,6 +11,7 @@ import javax.swing.JFrame;
 import ModuleB.adt.DeliveryProfileInterface;
 import ModuleD.entity.Schedule;
 import ModuleB.entity.DeliveryMan;
+import ModuleD.adt.ScheduleInterface;
 
 
 /**
@@ -34,7 +34,7 @@ public class PendingList extends JFrame{
     public DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryManManagement().getList(); 
     // get the list from the main page
    
-    public DeliveryInterface<Schedule> deliveryList = new DeliveryManManagement().getDeliList(); 
+    public ScheduleInterface<Schedule> deliveryList = new DeliveryManManagement().getDeliList(); 
     // get the list from the main page
     
     
@@ -83,17 +83,7 @@ public class PendingList extends JFrame{
                 int id = temp.getValue();
                 jtfID.setText(""+id);
                 String outputString ="";
-                int counter =0; // count the pending task
-                for(int a = 0; a< deliveryList.getNumberOfEntries();a++){
-                    if(deliveryList.getSelectedDelivery(a).getStaffID() == id){
-                        if(deliveryList.getSelectedDelivery(a).getDeliveryStatus().equals("Delivering")){
-                            outputString += deliveryList.getSelectedDelivery(a).toShortString()+ "\n";
-                            counter++;
-                        }
-                        
-                    }
-                }
-                outputString+= "\nTotal Pending jobs:" + counter; 
+                outputString += deliveryList.getPendingList(id);
                 jtaStaffList.setText(String.format("%-18s%-18s%-20s%-18s","ScheduleNo","OrderNo","CustName","CustomerContactNo")+"\n"+outputString);
                  if(id == 0){
                      jtfStatus.setText("Please select the staff name");

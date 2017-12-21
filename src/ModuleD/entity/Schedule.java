@@ -33,6 +33,10 @@ public class Schedule {
         this.estimatedTimeArrival = estimatedTimeArrival;
     }
 
+    public Schedule(int staffID, String orderID){ //newly added for set data
+        this.staffID = staffID;
+        this.orderID = orderID;
+    }
     public String getScheduleID() {
         return scheduleID;
     }

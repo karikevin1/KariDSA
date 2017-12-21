@@ -14,7 +14,9 @@ public interface ScheduleInterface<T> {
     public T removeSchedule(int position);
 //    public boolean replaceSchedule(int position, T newSchedule);
     public T getSchedule(int position);
+    public String getPendingList(int Id);
     public T updateSchedule(int position);
+    public int getNumberOfSchedule();
     public boolean isEmpty(); 
 //    public boolean clearSchedule();
 }

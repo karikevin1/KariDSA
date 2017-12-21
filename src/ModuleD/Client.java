@@ -5,8 +5,8 @@
  */
 package ModuleD;
 
-import ModuleD.adt.DeliveryADT;
-import ModuleD.adt.DeliveryInterface;
+import ModuleD.adt.ScheduleADT;
+import ModuleD.adt.ScheduleInterface;
 import ModuleD.entity.Schedule;
 
 /**
@@ -14,9 +14,9 @@ import ModuleD.entity.Schedule;
  * @author kevin lim
  */
 public class Client {
-    public static DeliveryInterface<Schedule> deliveryList = new DeliveryADT<>();
+    public static ScheduleInterface<Schedule> deliveryList = new ScheduleADT<>();
     
-    public DeliveryInterface<Schedule> getDeliList (){
+    public ScheduleInterface<Schedule> getDeliList (){
         return this.deliveryList;      // getter for super list object
     }
     public Client(){
@@ -51,28 +51,28 @@ public class Client {
                     //completed jobs
                     initializeList21= new Schedule("A022","LimKH", 1629,"A21", "Doggo", "0198377213", "Completed","5min");
                     initializeList22= new Schedule("A023","LimKH", 1629,"A22", "Cloud", "0198377213", "Completed","5min");
-                    this.deliveryList.createDelivery(initializeList1);
-                    this.deliveryList.createDelivery(initializeList2);
-                    this.deliveryList.createDelivery(initializeList3);
-                    this.deliveryList.createDelivery(initializeList4);
-                    this.deliveryList.createDelivery(initializeList5);
-                    this.deliveryList.createDelivery(initializeList6);
-                    this.deliveryList.createDelivery(initializeList7);
-                    this.deliveryList.createDelivery(initializeList8);
-                    this.deliveryList.createDelivery(initializeList9);
-                    this.deliveryList.createDelivery(initializeList10);
-                    this.deliveryList.createDelivery(initializeList11);
-                    this.deliveryList.createDelivery(initializeList12);
-                    this.deliveryList.createDelivery(initializeList13);
-                    this.deliveryList.createDelivery(initializeList14);
-                    this.deliveryList.createDelivery(initializeList15);
-                    this.deliveryList.createDelivery(initializeList16);
-                    this.deliveryList.createDelivery(initializeList17);
-                    this.deliveryList.createDelivery(initializeList18);
-                    this.deliveryList.createDelivery(initializeList19);
-                    this.deliveryList.createDelivery(initializeList20);
-                    this.deliveryList.createDelivery(initializeList21);
-                    this.deliveryList.createDelivery(initializeList22);
+                    this.deliveryList.addSchedule(initializeList1);
+                    this.deliveryList.addSchedule(initializeList2);
+                    this.deliveryList.addSchedule(initializeList3);
+                    this.deliveryList.addSchedule(initializeList4);
+                    this.deliveryList.addSchedule(initializeList5);
+                    this.deliveryList.addSchedule(initializeList6);
+                    this.deliveryList.addSchedule(initializeList7);
+                    this.deliveryList.addSchedule(initializeList8);
+                    this.deliveryList.addSchedule(initializeList9);
+                    this.deliveryList.addSchedule(initializeList10);
+                    this.deliveryList.addSchedule(initializeList11);
+                    this.deliveryList.addSchedule(initializeList12);
+                    this.deliveryList.addSchedule(initializeList13);
+                    this.deliveryList.addSchedule(initializeList14);
+                    this.deliveryList.addSchedule(initializeList15);
+                    this.deliveryList.addSchedule(initializeList16);
+                    this.deliveryList.addSchedule(initializeList17);
+                    this.deliveryList.addSchedule(initializeList18);
+                    this.deliveryList.addSchedule(initializeList19);
+                    this.deliveryList.addSchedule(initializeList20);
+                    this.deliveryList.addSchedule(initializeList21);
+                    this.deliveryList.addSchedule(initializeList22);
          }   
     }
 }
