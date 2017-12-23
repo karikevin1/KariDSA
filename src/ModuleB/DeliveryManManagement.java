@@ -165,6 +165,7 @@ public class DeliveryManManagement extends JFrame{
             }else if(temp.getValue() == 2){
                 deliveryProfileList.sortBasedPendingJobs();
             }
+            sortBox.setSelectedIndex(0);
         }
     }
     
