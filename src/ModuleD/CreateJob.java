@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ModuleD;
+import ModuleB.adt.DeliveryProfile;
+import ModuleB.adt.DeliveryProfileInterface;
+import ModuleB.entity.DeliveryMan;
 import ModuleD.entity.Schedule;
 import ModuleD.adt.ScheduleInterface;
 //import ModuleB.adt.*;
@@ -20,6 +23,7 @@ import javax.swing.JOptionPane;
 public class CreateJob extends javax.swing.JFrame {
 //    public static ScheduleInterface<Schedule> scheduleQueue = new ScheduleQueue<>();
     public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleADT<>();
+    public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>();
 //    public static ScheduleInterface<Schedule> scheduleList = new ScheduleList<>();
 //    public static OrderInterface<Order> orderList = new ModuleC.adt.OrderQueue<>();
     
@@ -31,13 +35,20 @@ public class CreateJob extends javax.swing.JFrame {
         return this.scheduleList;
     }
     
+    public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
+        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
+    }
     
+    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
+        return this.deliveryProfileList;      // getter for super list object
+    }
     /**
      * Creates new form CreateJob
      */
     public CreateJob() {
-        initialize();
         initComponents();
+        initialize();
+        
     }
 
     /**
@@ -58,6 +69,7 @@ public class CreateJob extends javax.swing.JFrame {
         btnAssign = new javax.swing.JButton();
         lblDeliverymanName = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,29 +97,39 @@ public class CreateJob extends javax.swing.JFrame {
 
         jLabel5.setText("Deliveryman Name:");
 
+        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ModuleD/icon_taxa_nav_arrow_left.png"))); // NOI18N
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbOrderNo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbDeliveryman, 0, 164, Short.MAX_VALUE)
-                            .addComponent(lblDeliverymanName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jcbOrderNo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblBack)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbDeliveryman, 0, 164, Short.MAX_VALUE)
+                                    .addComponent(lblDeliverymanName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
@@ -118,7 +140,9 @@ public class CreateJob extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +157,7 @@ public class CreateJob extends javax.swing.JFrame {
                     .addComponent(jcbOrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,21 +176,41 @@ public class CreateJob extends javax.swing.JFrame {
 
     private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
         Object selectedDeliveryman = jcbDeliveryman.getSelectedItem();
+        int selectedDelivery = jcbDeliveryman.getSelectedIndex();
         int deliveryman = (int)selectedDeliveryman;
-        jcbDeliveryman.removeItemAt((int)selectedDeliveryman);
+        jcbDeliveryman.removeItemAt(selectedDelivery);
         Object order = jcbOrderNo.getSelectedItem();
-        int orderNo = (int)order;
-        jcbOrderNo.removeItemAt(orderNo);
-        Schedule schedule = new Schedule(deliveryman, (String)order);
+        int selectedOrder = jcbOrderNo.getSelectedIndex();
+        String orderNo = String.valueOf(order);
+        jcbOrderNo.removeItemAt(selectedOrder);
+        Schedule schedule = new Schedule(deliveryman,orderNo);
         scheduleList.addSchedule(schedule);
 //        scheduleList.addSchedule(deliveryman,orderNo);
-        System.out.print(scheduleList);
+//        System.out.print(scheduleList);
+        
+        //set status to delivering
+        deliveryProfileList.setDeliveryStatus(deliveryman, "Delivering", true ,false); 
         JOptionPane.showMessageDialog(null, "Delivery job has successfully assigned!");
     }//GEN-LAST:event_btnAssignMouseClicked
 
     private void jcbDeliverymanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDeliverymanActionPerformed
-        //get selected item > display deliveryman name
+        String selected = String.valueOf(jcbDeliveryman.getSelectedItem());
+        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+            int staff = scheduleList.getSchedule(i).getStaffID();
+            if(String.valueOf(staff).equals(selected)){
+                String name = scheduleList.getSchedule(i).getStaffName();
+                lblDeliverymanName.setText(name);
+            }
+        }
     }//GEN-LAST:event_jcbDeliverymanActionPerformed
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        this.dispose();
+        ModuleDDriver driver = new ModuleDDriver();
+        driver.setLocationRelativeTo(null);
+        driver.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        driver.setVisible(true);
+    }//GEN-LAST:event_lblBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -199,7 +243,10 @@ public class CreateJob extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateJob().setVisible(true);
+                CreateJob driver = new CreateJob();
+                driver.setLocationRelativeTo(null);
+                driver.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                driver.setVisible(true);            
             }
         });
     }
@@ -213,6 +260,7 @@ public class CreateJob extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox jcbDeliveryman;
     private javax.swing.JComboBox jcbOrderNo;
+    private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblDeliverymanName;
     // End of variables declaration//GEN-END:variables
 
@@ -273,11 +321,18 @@ public class CreateJob extends javax.swing.JFrame {
         
 
         for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
-            jcbDeliveryman.addItem(scheduleList.getSchedule(i).getStaffID());
+            int staff = scheduleList.getSchedule(i).getStaffID();
+            jcbDeliveryman.addItem(staff);
+            
+            String order = scheduleList.getSchedule(i).getOrderID();
+            jcbOrderNo.addItem(order);
+
+        }
+        
+        
 //            jcbDeliveryman.addActionListener(jcbOrderNo);
-        }
-        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
-            jcbOrderNo.addItem(scheduleList.getSchedule(i).getOrderID());
-        }
+//        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+//            jcbOrderNo.addItem(scheduleList.getSchedule(i).getOrderID());
+//        }
     }
 }
