@@ -35,19 +35,19 @@ public class CreateJob extends javax.swing.JFrame {
         return this.scheduleList;
     }
     
-    public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
-        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
-    }
-    
-    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
-        return this.deliveryProfileList;      // getter for super list object
-    }
+//    public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
+//        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
+//    }
+//    
+//    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
+//        return this.deliveryProfileList;      // getter for super list object
+//    }
     /**
      * Creates new form CreateJob
      */
     public CreateJob() {
         initComponents();
-        initialize();
+        //initialize();
         
     }
 

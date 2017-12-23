@@ -5,12 +5,20 @@
  */
 package ModuleD;
 
+import ModuleB.adt.DeliveryProfile;
+import ModuleB.adt.DeliveryProfileInterface;
+import ModuleB.entity.DeliveryMan;
+import ModuleD.adt.ScheduleInterface;
+import ModuleD.entity.Schedule;
+
 /**
  *
  * @author Alex Ng
  */
 public class ModuleDDriver extends javax.swing.JFrame {
 
+    public static ScheduleInterface<Schedule> scheduleList = new Client().getDeliList();
+    public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new Client().getProfileList();
     /**
      * Creates new form ModuleDDriver
      */

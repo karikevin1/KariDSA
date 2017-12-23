@@ -5,20 +5,37 @@
  */
 package ModuleD;
 
+import ModuleB.DeliveryManManagement;
+import ModuleB.adt.DeliveryProfile;
+import ModuleB.adt.DeliveryProfileInterface;
+import ModuleB.entity.DeliveryMan;
 import ModuleD.adt.ScheduleADT;
 import ModuleD.adt.ScheduleInterface;
 import ModuleD.entity.Schedule;
+import java.awt.Dimension;
+import javax.swing.JFrame;
 
 /**
  *
  * @author kevin lim
  */
-public class Client {
+public class Client extends JFrame{
     public static ScheduleInterface<Schedule> deliveryList = new ScheduleADT<>();
+    public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryManManagement().getList();
     
     public ScheduleInterface<Schedule> getDeliList (){
         return this.deliveryList;      // getter for super list object
     }
+    
+      public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
+        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
+    }
+    
+    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
+        return this.deliveryProfileList;      // getter for super list object
+    }
+    
+    
     public Client(){
          if(this.deliveryList.isEmpty()){
                     Schedule initializeList1, initializeList2, initializeList3, initializeList4,initializeList5,
@@ -74,5 +91,7 @@ public class Client {
                     this.deliveryList.addSchedule(initializeList21);
                     this.deliveryList.addSchedule(initializeList22);
          }   
+         
     }
+    
 }
